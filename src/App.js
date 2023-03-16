@@ -101,34 +101,34 @@ export const App = () => {
 
             </Box>
           </Grid>
-        <Grid item sm={4} style={{spacing: "3%", height: '32%', marginLeft: "2.8%", padding: "0%"}}>
-          <Box
-            component="form"
-            sx={{
-              '& > :not(style)': { m: 0.3},
-            }}
-            noValidate
-            autoComplete="off"
-            >
-            <TextField id="endereco" label="Endereço" variant="outlined" />
-          </Box>
+          <Grid item sm={4} style={{spacing: "3%", height: '32%', marginLeft: "2.8%", padding: "0%"}}>
+            <Box
+              component="form"
+              sx={{
+                '& > :not(style)': { m: 0.3},
+              }}
+              noValidate
+              autoComplete="off"
+              >
+              <TextField id="endereco" label="Endereço" variant="outlined" />
+            </Box>
+          </Grid>
+          <Grid item sm={3} style={{spacing: "3%", height: '32%', marginLeft: "2.8%", padding: "0%"}}>
+            <Box
+              component="form"
+              sx={{
+                '& > :not(style)': { m: 0.3},
+              }}
+              noValidate
+              autoComplete="off"
+              >
+              <TextField id="cpf" label="CPF" variant="outlined" />
+            </Box>
+          </Grid>
+          <Grid item sm={12} style={{height: '20%', padding: "0%", display: "flex", justifyContent: "flex-end", marginTop:"1.3%", marginBottom:"1.3%"}}>
+            <Button variant="contained" style={{height: '110%', width: "15%", marginRight: "0.7%"}}>Adicionar</Button>
+          </Grid>
         </Grid>
-        <Grid item sm={3} style={{spacing: "3%", height: '32%', marginLeft: "2.8%", padding: "0%"}}>
-          <Box
-            component="form"
-            sx={{
-              '& > :not(style)': { m: 0.3},
-            }}
-            noValidate
-            autoComplete="off"
-            >
-            <TextField id="cpf" label="CPF" variant="outlined" />
-          </Box>
-        </Grid>
-        <Grid item sm={12} style={{height: '20%', padding: "0%", display: "flex", justifyContent: "flex-end", marginTop:"1.3%", marginBottom:"1.3%"}}>
-          <Button variant="contained" style={{height: '110%', width: "15%", marginRight: "0.7%"}}>Adicionar</Button>
-        </Grid>
-       </Grid>
        <Grid item style={{ height: "50%", padding: "0%", marginRight: "2%"}}>
         <Paper sx={{ width: '90%', overflow: 'hidden', height: "100%" }}>
           <TableContainer sx={{ maxHeight: 440 }}>
