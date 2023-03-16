@@ -1,8 +1,15 @@
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Axios from 'axios';
 import  { Grid, TextField, Typography, Button }  from "@mui/material";
 import Box from '@mui/material/Box';
 import "./App.css";
+import Paper from '@mui/material/Paper';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 
 export const App = () => {
 
@@ -11,13 +18,13 @@ export const App = () => {
   }
 
   const firstPart = {
-    backgroundImage: "linear-gradient(90deg, #1A237E 0%, #3F51B5 100%)",
-    height: "20%",
-    padding: "0% 20% 2% 10%",
+    backgroundImage: "linear-gradient(90deg, #1A237E 0%, #5C6BC0 100%)",
+    height: "24%",
+    padding: "0% 20% 2% 11%",
     display: "flex",
     alignItems:"flex-end",
     fontFamily: 'Arial',
-    fontSize: '330%',
+    fontSize: '310%',
     color: 'white'
   }
 
@@ -25,7 +32,7 @@ export const App = () => {
     display: "flex", 
     direction: "column", 
     paddingLeft: "12%",
-    backgroundColor: "#EEEEEE"
+    backgroundColor: "#E0E0E0"
   }
 
   const containerAdicionarCliente ={
@@ -34,21 +41,40 @@ export const App = () => {
     alignItems: "flex-start",
     paddingRight: "2%", 
     marginRight: "12%",
-    marginTop: "1.4%",
+    marginTop: "2.6%",
     height: "28%",
     backgroundColor: "white",
     borderRadius: "3px" 
   }
 
+  const columns = [
+    { id: 'nome', label: 'Nome', minWidth: 170 },
+    {
+      id: 'endereco',
+      label: 'Endereço',
+      minWidth: 170,
+      align: 'left'
+    },
+    {
+      id: 'cpf',
+      label: 'CPF',
+      minWidth: 170,
+      align: 'left'
+    },
+  ];
+
+  const [dataCliente, setDataCliente] = useState([])  
+
   useEffect(() => {
     Axios.get("http://localhost:8080/cliente")
     .then((response) => {
         console.log(response.data);
+        setDataCliente(response.data)
     })
     .catch((error) => {
         console.log(error);
     })
-}, [])
+  }, [])
 
   return (
     <Grid container  style={containerStyle}>
@@ -56,7 +82,7 @@ export const App = () => {
           Sistema de Contas
       </Grid>
       <Grid container item sm={12} spacing={2} style={secondPart}>
-        <Grid container item sm={12} spacing={2} style={containerAdicionarCliente}>
+        <Grid container item sm={12} style={containerAdicionarCliente}>
           <Grid item sm={12} style={{height: "20%", padding: "0%", marginBottom: "0.5%"}}>
             <Typography style={{fontFamily: 'Arial', fontSize: '150%', paddingLeft: "0.1%", color: "#424242"}}>
               Cliente
@@ -102,6 +128,46 @@ export const App = () => {
         <Grid item sm={12} style={{height: '20%', padding: "0%", display: "flex", justifyContent: "flex-end", marginTop:"1.3%", marginBottom:"1.3%"}}>
           <Button variant="contained" style={{height: '110%', width: "15%", marginRight: "0.7%"}}>Adicionar</Button>
         </Grid>
+       </Grid>
+       <Grid item style={{ height: "50%", padding: "0%", marginRight: "2%"}}>
+        <Paper sx={{ width: '90%', overflow: 'hidden', height: "100%" }}>
+          <TableContainer sx={{ maxHeight: 440 }}>
+            <Table stickyHeader aria-label="sticky table">
+              <TableHead>
+                <TableRow>
+                  {columns.map((column) => (
+                    <TableCell
+                      key={column.id}
+                      align={column.align}
+                      style={{ minWidth: column.minWidth }}
+                    >
+                      {column.label}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {dataCliente
+                  .map((row) => {
+                    return (
+                      <TableRow role="checkbox" tabIndex={-1} key={row.nome}>
+                        {columns.map((column) => {
+                          const value = row[column.id];
+                          return (
+                            <TableCell key={column.id} align={column.align}>
+                              {column.format && typeof value === 'number'
+                                ? column.format(value)
+                                : value}
+                            </TableCell>
+                          );
+                        })}
+                      </TableRow>
+                    );
+                  })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Paper>
        </Grid>
       </Grid>
     </Grid>
