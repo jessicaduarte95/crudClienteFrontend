@@ -20,8 +20,8 @@ export const App = () => {
 
   const firstPart = {
     backgroundImage: "linear-gradient(90deg, #1A237E 0%, #5C6BC0 100%)",
-    height: "24%",
-    padding: "0% 20% 2% 11%",
+    height: "13rem",
+    padding: "0rem 8rem 2rem 13rem",
     display: "flex",
     alignItems:"flex-end",
     fontFamily: 'Arial',
