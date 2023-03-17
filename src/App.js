@@ -154,8 +154,8 @@ export const App = () => {
             </Grid>
           </form>
         </Grid>
-       <Grid item style={{ height: "40rem", padding: "0rem", marginRight: "1.4rem"}}>
-        <Paper sx={{ width: '94rem', overflow: 'hidden', height: "28rem" }}>
+       <Grid item style={{ padding: "0rem", marginRight: "12rem", marginTop: "2.5rem", display: "flex", paddingRight:" 0.5rem", height: "35rem"}}>
+        <Paper sx={{ width: '94rem', overflow: 'hidden', height: "26rem" }}>
           <TableContainer sx={{ maxHeight: 440 }}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
@@ -165,6 +165,7 @@ export const App = () => {
                       key={column.id}
                       align={column.align}
                       style={{ width: column.width }}
+                      sx={{  fontWeight: 'bold' }}
                     >
                       {column.label}
                     </TableCell>
