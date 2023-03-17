@@ -30,8 +30,6 @@ export const App = () => {
   }
 
   const secondPart = {
-    // display: "flex", 
-    // direction: "column", 
     paddingLeft: "14rem",
     backgroundColor: "#E0E0E0"
   }
@@ -53,18 +51,29 @@ export const App = () => {
       id: 'nome', 
       label: 'Nome',  
       align: 'left', 
-      width: 40,
     },
     {
       id: 'endereco',
       label: 'Endereço',
-      width: '50%',
+      paddingRight: "35rem",
       align: 'left'
     },
     {
       id: 'cpf',
       label: 'CPF',
-      width: '20%',
+      paddingRight: "7rem",
+      align: 'left'
+    },
+    {
+      id: 'editar',
+      label: 'Editar',
+      paddingRight: "3rem",
+      align: 'left'
+    },
+    {
+      id: 'excluir',
+      label: 'Excluir',
+      paddingRight: "3rem",
       align: 'left'
     },
   ];
@@ -164,8 +173,7 @@ export const App = () => {
                     <TableCell
                       key={column.id}
                       align={column.align}
-                      style={{ width: column.width }}
-                      sx={{  fontWeight: 'bold' }}
+                      sx={{  fontWeight: 'bold', paddingRight: column.paddingRight }}
                     >
                       {column.label}
                     </TableCell>
