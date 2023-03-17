@@ -155,7 +155,7 @@ export const App = () => {
           </form>
         </Grid>
        <Grid item style={{ padding: "0rem", marginRight: "12rem", marginTop: "2.5rem", display: "flex", paddingRight:" 0.5rem", height: "35rem"}}>
-        <Paper sx={{ width: '94rem', overflow: 'hidden', height: "26rem" }}>
+        <Paper sx={{ width: '94rem', overflow: 'hidden', height: "26rem", marginRight: "11.5rem" }}>
           <TableContainer sx={{ maxHeight: 440 }}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
