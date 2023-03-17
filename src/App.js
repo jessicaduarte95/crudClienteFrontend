@@ -10,6 +10,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import { useForm } from "react-hook-form";
 
 export const App = () => {
 
@@ -31,7 +32,7 @@ export const App = () => {
   const secondPart = {
     display: "flex", 
     direction: "column", 
-    paddingLeft: "12%",
+    paddingLeft: "14rem",
     backgroundColor: "#E0E0E0"
   }
 
@@ -39,12 +40,12 @@ export const App = () => {
     display: "flex", 
     direction: "column", 
     alignItems: "flex-start",
-    paddingRight: "2%", 
-    marginRight: "12%",
-    marginTop: "2.6%",
-    height: "28%",
+    paddingRight: "0.5rem", 
+    marginRight: "12rem",
+    marginTop: "2.5rem",
+    height: "12rem",
     backgroundColor: "white",
-    borderRadius: "3px" 
+    borderRadius: "0.4rem" 
   }
 
   const columns = [
@@ -64,6 +65,11 @@ export const App = () => {
   ];
 
   const [dataCliente, setDataCliente] = useState([])  
+  const { register, handleSubmit } = useForm();
+
+  const onSubmit = (data) => {
+    console.log("Teste", data);
+  }
 
   useEffect(() => {
     Axios.get("http://localhost:8080/cliente")
@@ -83,51 +89,55 @@ export const App = () => {
       </Grid>
       <Grid container item sm={12} spacing={2} style={secondPart}>
         <Grid container item sm={12} style={containerAdicionarCliente}>
-          <Grid item sm={12} style={{height: "20%", padding: "0%", marginBottom: "0.5%"}}>
-            <Typography style={{fontFamily: 'Arial', fontSize: '150%', paddingLeft: "0.1%", color: "#424242"}}>
-              Cliente
-            </Typography>
-          </Grid>
-          <Grid item sm={4} style={{spacing: "1%", height: '32%', padding: "0%"}}>
-            <Box
-            component="form"
-            sx={{
-              '& > :not(style)': { m: 0.3 },
-            }}
-            noValidate
-            autoComplete="off"
-            >
-              <TextField id="nome" label="Nome" variant="outlined" />
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Grid item sm={12} style={{height: "3rem", padding: "0rem", marginBottom: "0.2rem"}}>
+              <Typography style={{fontFamily: 'Arial', fontSize: '1.8rem', paddingLeft: "0.1rem", color: "#424242"}}>
+                Cliente
+              </Typography>
+            </Grid>
+            <Grid item style={{display: "flex", direction: "column", height: '4.5rem'}}>
+              <Grid item sm={4} style={{height: '3.3rem', padding: "0rem"}}>
+                <Box
+                component="form"
+                sx={{
+                  '& > :not(style)': { m: 0.3 },
+                }}
+                noValidate
+                autoComplete="off"
+                >
+                  <TextField id="nome" label="Nome" variant="outlined" {...register("nome", { required: true })}/>
 
-            </Box>
-          </Grid>
-          <Grid item sm={4} style={{spacing: "3%", height: '32%', marginLeft: "2.8%", padding: "0%"}}>
-            <Box
-              component="form"
-              sx={{
-                '& > :not(style)': { m: 0.3},
-              }}
-              noValidate
-              autoComplete="off"
-              >
-              <TextField id="endereco" label="Endereço" variant="outlined" />
-            </Box>
-          </Grid>
-          <Grid item sm={3} style={{spacing: "3%", height: '32%', marginLeft: "2.8%", padding: "0%"}}>
-            <Box
-              component="form"
-              sx={{
-                '& > :not(style)': { m: 0.3},
-              }}
-              noValidate
-              autoComplete="off"
-              >
-              <TextField id="cpf" label="CPF" variant="outlined" />
-            </Box>
-          </Grid>
-          <Grid item sm={12} style={{height: '20%', padding: "0%", display: "flex", justifyContent: "flex-end", marginTop:"1.3%", marginBottom:"1.3%"}}>
-            <Button variant="contained" style={{height: '110%', width: "15%", marginRight: "0.7%"}}>Adicionar</Button>
-          </Grid>
+                </Box>
+              </Grid>
+              <Grid item sm={4} style={{height: '3.3rem', marginLeft: "2.5rem", padding: "0rem"}}>
+                <Box
+                  component="form"
+                  sx={{
+                    '& > :not(style)': { m: 0.3},
+                  }}
+                  noValidate
+                  autoComplete="off"
+                  >
+                  <TextField id="endereco" label="Endereço" variant="outlined" {...register("endereco", { required: true })}/>
+                </Box>
+              </Grid>
+              <Grid item sm={3} style={{height: '3.3rem', marginLeft: "2.5rem", padding: "0rem"}}>
+                <Box
+                  component="form"
+                  sx={{
+                    '& > :not(style)': { m: 0.3},
+                  }}
+                  noValidate
+                  autoComplete="off"
+                  >
+                  <TextField id="cpf" label="CPF" variant="outlined"  {...register("cpf", { required: true })}/>
+                </Box>
+              </Grid>
+            </Grid>
+            <Grid item sm={12} style={{height: '2.5rem', padding: "0rem", display: "flex", justifyContent: "flex-end"}}>
+              <Button type="submit" variant="contained" style={{height: '2.5rem', width: "7.5rem", marginRight: "1.4rem"}}>Adicionar</Button>
+            </Grid>
+          </form>
         </Grid>
        <Grid item style={{ height: "50%", padding: "0%", marginRight: "2%"}}>
         <Paper sx={{ width: '90%', overflow: 'hidden', height: "100%" }}>
