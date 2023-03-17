@@ -30,8 +30,8 @@ export const App = () => {
   }
 
   const secondPart = {
-    display: "flex", 
-    direction: "column", 
+    // display: "flex", 
+    // direction: "column", 
     paddingLeft: "14rem",
     backgroundColor: "#E0E0E0"
   }
@@ -49,17 +49,22 @@ export const App = () => {
   }
 
   const columns = [
-    { id: 'nome', label: 'Nome', minWidth: 170 },
+    { 
+      id: 'nome', 
+      label: 'Nome',  
+      align: 'left', 
+      width: 40,
+    },
     {
       id: 'endereco',
       label: 'Endereço',
-      minWidth: 170,
+      width: '50%',
       align: 'left'
     },
     {
       id: 'cpf',
       label: 'CPF',
-      minWidth: 170,
+      width: '20%',
       align: 'left'
     },
   ];
@@ -68,7 +73,17 @@ export const App = () => {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (data) => {
-    console.log("Teste", data);
+    console.log("Teste", data.endereco);
+    Axios.post("http://localhost:8080/cliente", {
+      nome: data.nome,
+      endereco: data.endereco,
+      cpf: data.cpf
+    }
+        ).then((response) => {
+          console.log(response.data)
+      }).catch((error) => {
+          console.log(error)
+      })
   }
 
   useEffect(() => {
@@ -89,7 +104,7 @@ export const App = () => {
       </Grid>
       <Grid container item sm={12} spacing={2} style={secondPart}>
         <Grid container item sm={12} style={containerAdicionarCliente}>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form id="adicionar" onSubmit={handleSubmit(onSubmit)}>
             <Grid item sm={12} style={{height: "3rem", padding: "0rem", marginBottom: "0.2rem"}}>
               <Typography style={{fontFamily: 'Arial', fontSize: '1.8rem', paddingLeft: "0.1rem", color: "#424242"}}>
                 Cliente
@@ -139,8 +154,8 @@ export const App = () => {
             </Grid>
           </form>
         </Grid>
-       <Grid item style={{ height: "50%", padding: "0%", marginRight: "2%"}}>
-        <Paper sx={{ width: '90%', overflow: 'hidden', height: "100%" }}>
+       <Grid item style={{ height: "40rem", padding: "0rem", marginRight: "1.4rem"}}>
+        <Paper sx={{ width: '94rem', overflow: 'hidden', height: "28rem" }}>
           <TableContainer sx={{ maxHeight: 440 }}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
@@ -149,7 +164,7 @@ export const App = () => {
                     <TableCell
                       key={column.id}
                       align={column.align}
-                      style={{ minWidth: column.minWidth }}
+                      style={{ width: column.width }}
                     >
                       {column.label}
                     </TableCell>
@@ -157,23 +172,16 @@ export const App = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {dataCliente
-                  .map((row) => {
-                    return (
-                      <TableRow role="checkbox" tabIndex={-1} key={row.nome}>
-                        {columns.map((column) => {
-                          const value = row[column.id];
-                          return (
-                            <TableCell key={column.id} align={column.align}>
-                              {column.format && typeof value === 'number'
-                                ? column.format(value)
-                                : value}
-                            </TableCell>
-                          );
-                        })}
-                      </TableRow>
-                    );
-                  })}
+                {dataCliente.map((row) => (
+                  <TableRow
+                    key={row.cpf}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                  >
+                    <TableCell align="left">{row.nome}</TableCell>
+                    <TableCell align="left">{row.endereco}</TableCell>
+                    <TableCell align="left">{row.cpf}</TableCell>
+                  </TableRow>
+                ))}
               </TableBody>
             </Table>
           </TableContainer>
