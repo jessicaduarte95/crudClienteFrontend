@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import  { Grid, Button }  from "@mui/material";
+import Axios from 'axios';
 
 const style = {
   position: 'absolute',
@@ -17,7 +18,18 @@ const style = {
 
 export const ModalExcluir = (props) => {
 
-    const {openExcluirCliente, handleCloseExcluirCliente} = props;
+    const {openExcluirCliente, handleCloseExcluirCliente, id, allData} = props;
+
+    const excluirCliente = () => {
+        Axios.delete(`http://localhost:8080/cliente/${id}`)
+        .then((response) => {
+            allData()
+            handleCloseExcluirCliente()
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+    }
 
   return (
     <Modal
@@ -35,7 +47,7 @@ export const ModalExcluir = (props) => {
         </Typography>
         <Grid container item sm={12} style={{marginTop: "1rem", justifyContent: "flex-end"}}>
             <Button type="submit" variant="outlined" style={{height: '2.5rem', width: "6.5rem"}} onClick={handleCloseExcluirCliente}>Cancelar</Button>
-            <Button type="submit" variant="contained" style={{height: '2.5rem', width: "6.5rem", marginLeft: "0.7rem"}}>Excluir</Button>
+            <Button type="submit" variant="contained" style={{height: '2.5rem', width: "6.5rem", marginLeft: "0.7rem"}}  onClick={excluirCliente}>Excluir</Button>
         </Grid>
     </Box>
     </Modal>

@@ -94,6 +94,7 @@ export const App = () => {
   const [openExcluirCliente, setOpenExcluirCliente] = useState(false);
   const handleOpenExcluirCliente = () => setOpenExcluirCliente(true);
   const handleCloseExcluirCliente = () => setOpenExcluirCliente(false);
+  const [id, setId] = useState("");
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -107,7 +108,6 @@ export const App = () => {
   const allData = () => {
     Axios.get("http://localhost:8080/cliente")
     .then((response) => {
-        console.log(response.data);
         setDataCliente(response.data)
     })
     .catch((error) => {
@@ -232,7 +232,7 @@ export const App = () => {
                       </IconButton>
                     </TableCell>
                     <TableCell>
-                      <IconButton onClick={handleOpenExcluirCliente}>
+                      <IconButton onClick={() => {handleOpenExcluirCliente(); setId(row.idCliente)}}>
                         <DeleteOutlineIcon fontSize="small" sx={{ color: "#B71C1C" }}/>
                       </IconButton>
                     </TableCell>
@@ -254,7 +254,7 @@ export const App = () => {
         </Paper>
        </Grid>
       </Grid>
-      <ModalExcluir openExcluirCliente={openExcluirCliente} handleCloseExcluirCliente={handleCloseExcluirCliente}/>
+      <ModalExcluir openExcluirCliente={openExcluirCliente} handleCloseExcluirCliente={handleCloseExcluirCliente} id={id} allData={allData} />
     </Grid>
   );
 }
