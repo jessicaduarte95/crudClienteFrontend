@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
@@ -22,7 +22,7 @@ export const ModalEditar = (props) => {
     const { register, handleSubmit } = useForm();
 
     const onSubmit = (data) => {
-        console.log("Aquiii", data);
+        console.log("data: ", data);
     };
 
   return (
@@ -46,7 +46,7 @@ export const ModalEditar = (props) => {
             noValidate
             autoComplete="off"
             >
-                <TextField id="nome" label="Nome" variant="outlined" {...register("nome", { required: true })} style={{width: "100%", marginBottom: "1rem"}}/>
+                <TextField id="nome" label="Nome" variant="outlined" {...register("nome", { required: true })} defaultValue={props.rowData.nome} style={{width: "100%", marginBottom: "1rem"}}/>
 
             </Box>
             <Box
@@ -57,7 +57,7 @@ export const ModalEditar = (props) => {
                 noValidate
                 autoComplete="off"
                 >
-                <TextField id="endereco" label="Endereço" variant="outlined" {...register("endereco", { required: true })} style={{width: "100%", marginBottom: "1rem"}}/>
+                <TextField id="endereco" label="Endereço" variant="outlined" {...register("endereco", { required: true })} defaultValue={props.rowData.endereco} style={{width: "100%", marginBottom: "1rem"}}/>
             </Box>
             <Box
                 component="form"
@@ -67,12 +67,12 @@ export const ModalEditar = (props) => {
                 noValidate
                 autoComplete="off"
                 >
-                <TextField id="cpf" label="CPF" variant="outlined"  {...register("cpf", { required: true })} style={{width: "100%"}}/>
+                <TextField id="cpf" label="CPF" variant="outlined"  {...register("cpf", { required: true })} defaultValue={props.rowData.cpf} style={{width: "100%"}}/>
             </Box>
         </Grid>
         </form>
         <Grid container item sm={12} style={{marginTop: "1rem", justifyContent: "flex-end"}}>
-        <Button type="submit" variant="outlined" style={{height: '2.5rem', width: "6.5rem"}} onClick={handleCloseEditarCliente}>Cancelar</Button>
+        <Button variant="outlined" style={{height: '2.5rem', width: "6.5rem"}} onClick={handleCloseEditarCliente}>Cancelar</Button>
         <Button type="submit" variant="contained" style={{height: '2.5rem', width: "5.5rem", marginLeft: "0.7rem"}}>Salvar</Button>
         </Grid>
     </Box>

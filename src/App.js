@@ -99,6 +99,7 @@ export const App = () => {
   const handleOpenEditarCliente = () => setOpenEditarCliente(true);
   const handleCloseEditarCliente = () => setOpenEditarCliente(false);
   const [id, setId] = useState("");
+  const [rowData, setRowData] = useState("");
 
 
   const handleChangePage = (event, newPage) => {
@@ -232,7 +233,7 @@ export const App = () => {
                     <TableCell align="left">{row.endereco}</TableCell>
                     <TableCell align="left">{row.cpf}</TableCell>
                     <TableCell>
-                      <IconButton onClick={() => {handleOpenEditarCliente()}}>
+                      <IconButton onClick={() => {handleOpenEditarCliente(); setRowData(row)}}>
                         <EditIcon fontSize="small" sx={{ color: "#1B5E20" }}/>
                       </IconButton>
                     </TableCell>
@@ -260,7 +261,7 @@ export const App = () => {
        </Grid>
       </Grid>
       <ModalExcluir openExcluirCliente={openExcluirCliente} handleCloseExcluirCliente={handleCloseExcluirCliente} id={id} allData={allData} />
-      <ModalEditar openEditarCliente={openEditarCliente} handleCloseEditarCliente={handleCloseEditarCliente} />
+      <ModalEditar openEditarCliente={openEditarCliente} handleCloseEditarCliente={handleCloseEditarCliente} rowData={rowData} />
     </Grid>
   );
 }
