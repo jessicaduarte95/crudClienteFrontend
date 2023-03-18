@@ -13,6 +13,7 @@ import TableRow from '@mui/material/TableRow';
 import { useForm } from "react-hook-form";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import TablePagination from '@mui/material/TablePagination';
 
 export const App = () => {
 
@@ -40,12 +41,12 @@ export const App = () => {
     display: "flex", 
     direction: "column", 
     alignItems: "flex-start",
-    paddingRight: "0.5rem", 
-    marginRight: "12rem",
+    marginRight: "16rem",
     marginTop: "2.5rem",
     height: "12rem",
     backgroundColor: "white",
-    borderRadius: "0.4rem" 
+    borderRadius: "0.4rem", 
+    paddingRight: "1.4rem"
   }
 
   const columns = [
@@ -53,18 +54,19 @@ export const App = () => {
       id: 'nome', 
       label: 'Nome',  
       align: 'left', 
+      width: "35%"
     },
     {
       id: 'endereco',
       label: 'Endereço',
-      paddingRight: "35rem",
-      align: 'left'
+      align: 'left',
+      width: "35%"
     },
     {
       id: 'cpf',
       label: 'CPF',
-      paddingRight: "7rem",
-      align: 'left'
+      align: 'left',
+      width: "18%"
     },
     {
       id: 'editar',
@@ -80,10 +82,32 @@ export const App = () => {
 
   const [dataCliente, setDataCliente] = useState([])  
   const { register, handleSubmit } = useForm();
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const onSubmit = (data) => {
-    console.log("Teste", data.endereco);
-    Axios.post("http://localhost:8080/cliente", {
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+
+  const allData = () => {
+    Axios.get("http://localhost:8080/cliente")
+    .then((response) => {
+        console.log(response.data);
+        setDataCliente(response.data)
+    })
+    .catch((error) => {
+        console.log(error);
+    })
+  }
+
+  const onSubmit = async (data) => {
+
+    await Axios.post("http://localhost:8080/cliente", {
       nome: data.nome,
       endereco: data.endereco,
       cpf: data.cpf
@@ -93,17 +117,12 @@ export const App = () => {
       }).catch((error) => {
           console.log(error)
       })
+
+      allData()
   }
 
   useEffect(() => {
-    Axios.get("http://localhost:8080/cliente")
-    .then((response) => {
-        console.log(response.data);
-        setDataCliente(response.data)
-    })
-    .catch((error) => {
-        console.log(error);
-    })
+    allData()
   }, [])
 
   return (
@@ -113,8 +132,8 @@ export const App = () => {
       </Grid>
       <Grid container item sm={12} spacing={2} style={secondPart}>
         <Grid container item sm={12} style={containerAdicionarCliente}>
-          <form id="adicionar" onSubmit={handleSubmit(onSubmit)}>
-            <Grid item sm={12} style={{height: "3rem", padding: "0rem", marginBottom: "0.2rem"}}>
+          <form id="adicionar" onSubmit={handleSubmit(onSubmit)} style={{ width: "inherit"}}>
+            <Grid item sm={12} style={{height: "3rem", marginBottom: "0.2rem"}}>
               <Typography style={{fontFamily: 'Arial', fontSize: '1.8rem', paddingLeft: "0.1rem", color: "#424242"}}>
                 Cliente
               </Typography>
@@ -124,12 +143,12 @@ export const App = () => {
                 <Box
                 component="form"
                 sx={{
-                  '& > :not(style)': { m: 0.3 },
+                  '& > :not(style)': { m: 0.3 }
                 }}
                 noValidate
                 autoComplete="off"
                 >
-                  <TextField id="nome" label="Nome" variant="outlined" {...register("nome", { required: true })}/>
+                  <TextField id="nome" label="Nome" variant="outlined" {...register("nome", { required: true })} style={{width: "100%"}}/>
 
                 </Box>
               </Grid>
@@ -142,10 +161,10 @@ export const App = () => {
                   noValidate
                   autoComplete="off"
                   >
-                  <TextField id="endereco" label="Endereço" variant="outlined" {...register("endereco", { required: true })}/>
+                  <TextField id="endereco" label="Endereço" variant="outlined" {...register("endereco", { required: true })} style={{width: "100%"}}/>
                 </Box>
               </Grid>
-              <Grid item sm={3} style={{height: '3.3rem', marginLeft: "2.5rem", padding: "0rem"}}>
+              <Grid item sm={4} style={{height: '3.3rem', marginLeft: "2.5rem", padding: "0rem"}}>
                 <Box
                   component="form"
                   sx={{
@@ -154,17 +173,23 @@ export const App = () => {
                   noValidate
                   autoComplete="off"
                   >
-                  <TextField id="cpf" label="CPF" variant="outlined"  {...register("cpf", { required: true })}/>
+                  <TextField id="cpf" label="CPF" variant="outlined"  {...register("cpf", { required: true })} style={{width: "100%"}}/>
                 </Box>
               </Grid>
             </Grid>
-            <Grid item sm={12} style={{height: '2.5rem', padding: "0rem", display: "flex", justifyContent: "flex-end"}}>
-              <Button type="submit" variant="contained" style={{height: '2.5rem', width: "7.5rem", marginRight: "1.4rem"}}>Adicionar</Button>
+            <Grid container item sm={12}>
+              <Grid item sm={8}>
+                <Button type="submit" variant="contained" style={{height: '2.5rem', width: "6.5rem"}}>Contas</Button>
+                <Button type="submit" variant="contained" style={{height: '2.5rem', width: "8.5rem", marginLeft: "0.5rem"}}>Movimentação</Button>
+              </Grid>
+              <Grid item sm={4} style={{height: '2.5rem', display: "flex", justifyContent: "flex-end"}}>
+                <Button type="submit" variant="contained" style={{height: '2.5rem', width: "7.5rem"}}>Adicionar</Button>
+              </Grid>
             </Grid>
           </form>
         </Grid>
-       <Grid item style={{ padding: "0rem", marginRight: "12rem", marginTop: "2.5rem", display: "flex", paddingRight:" 0.5rem", height: "35rem"}}>
-        <Paper sx={{ width: '94rem', overflow: 'hidden', height: "28rem", marginRight: "11.5rem" }}>
+       <Grid item style={{ padding: "0rem", marginTop: "2.5rem", display: "flex", height: "35rem", width: "inherit"}}>
+        <Paper sx={{overflow: 'hidden', height: "28rem", width: "85%" }}>
           <TableContainer sx={{ maxHeight: 440 }}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
@@ -173,7 +198,7 @@ export const App = () => {
                     <TableCell
                       key={column.id}
                       align={column.align}
-                      sx={{  fontWeight: 'bold', paddingRight: column.paddingRight }}
+                      sx={{  fontWeight: 'bold', paddingRight: column.paddingRight, width: column.width }}
                     >
                       {column.label}
                     </TableCell>
@@ -181,10 +206,12 @@ export const App = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {dataCliente.map((row) => (
+                {dataCliente 
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((row) => (
                   <TableRow
                     key={row.cpf}
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                    role="checkbox" tabIndex={-1}
                   >
                     <TableCell align="left">{row.nome}</TableCell>
                     <TableCell align="left">{row.endereco}</TableCell>
@@ -204,6 +231,16 @@ export const App = () => {
               </TableBody>
             </Table>
           </TableContainer>
+          <TablePagination
+            style={{width: "100%"}}
+            rowsPerPageOptions={[5, 10, 25]}
+            component="div"
+            count={dataCliente.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
         </Paper>
        </Grid>
       </Grid>
