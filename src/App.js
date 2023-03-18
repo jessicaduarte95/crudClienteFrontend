@@ -80,8 +80,14 @@ export const App = () => {
     },
   ];
 
+  const defaultValues = {
+    nome: "",
+    endereco: "",
+    cpf: ""
+  }
+
   const [dataCliente, setDataCliente] = useState([])  
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm({defaultValues});
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -105,7 +111,7 @@ export const App = () => {
     })
   }
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data, e) => {
 
     await Axios.post("http://localhost:8080/cliente", {
       nome: data.nome,
@@ -117,8 +123,8 @@ export const App = () => {
       }).catch((error) => {
           console.log(error)
       })
-
-      allData()
+      reset();
+      allData();
   }
 
   useEffect(() => {
