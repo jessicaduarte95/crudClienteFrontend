@@ -14,6 +14,7 @@ import { useForm } from "react-hook-form";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import TablePagination from '@mui/material/TablePagination';
+import { ModalExcluir } from "./ModalCliente/ModalExcluir";
 
 export const App = () => {
 
@@ -90,6 +91,9 @@ export const App = () => {
   const { register, handleSubmit, reset } = useForm({defaultValues});
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [openExcluirCliente, setOpenExcluirCliente] = useState(false);
+  const handleOpenExcluirCliente = () => setOpenExcluirCliente(true);
+  const handleCloseExcluirCliente = () => setOpenExcluirCliente(false);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -228,7 +232,7 @@ export const App = () => {
                       </IconButton>
                     </TableCell>
                     <TableCell>
-                      <IconButton>
+                      <IconButton onClick={handleOpenExcluirCliente}>
                         <DeleteOutlineIcon fontSize="small" sx={{ color: "#B71C1C" }}/>
                       </IconButton>
                     </TableCell>
@@ -250,6 +254,7 @@ export const App = () => {
         </Paper>
        </Grid>
       </Grid>
+      <ModalExcluir openExcluirCliente={openExcluirCliente} handleCloseExcluirCliente={handleCloseExcluirCliente}/>
     </Grid>
   );
 }
