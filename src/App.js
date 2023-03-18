@@ -15,6 +15,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import TablePagination from '@mui/material/TablePagination';
 import { ModalExcluir } from "./ModalCliente/ModalExcluir";
+import { ModalEditar } from "./ModalCliente/ModalEditar";
 
 export const App = () => {
 
@@ -94,7 +95,11 @@ export const App = () => {
   const [openExcluirCliente, setOpenExcluirCliente] = useState(false);
   const handleOpenExcluirCliente = () => setOpenExcluirCliente(true);
   const handleCloseExcluirCliente = () => setOpenExcluirCliente(false);
+  const [openEditarCliente, setOpenEditarCliente] = useState(false);
+  const handleOpenEditarCliente = () => setOpenEditarCliente(true);
+  const handleCloseEditarCliente = () => setOpenEditarCliente(false);
   const [id, setId] = useState("");
+
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -227,7 +232,7 @@ export const App = () => {
                     <TableCell align="left">{row.endereco}</TableCell>
                     <TableCell align="left">{row.cpf}</TableCell>
                     <TableCell>
-                      <IconButton>
+                      <IconButton onClick={() => {handleOpenEditarCliente()}}>
                         <EditIcon fontSize="small" sx={{ color: "#1B5E20" }}/>
                       </IconButton>
                     </TableCell>
@@ -255,6 +260,7 @@ export const App = () => {
        </Grid>
       </Grid>
       <ModalExcluir openExcluirCliente={openExcluirCliente} handleCloseExcluirCliente={handleCloseExcluirCliente} id={id} allData={allData} />
+      <ModalEditar openEditarCliente={openEditarCliente} handleCloseEditarCliente={handleCloseEditarCliente} />
     </Grid>
   );
 }
