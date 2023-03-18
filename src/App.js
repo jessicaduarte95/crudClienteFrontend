@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Axios from 'axios';
-import  { Grid, TextField, Typography, Button }  from "@mui/material";
+import  { Grid, TextField, Typography, Button, IconButton }  from "@mui/material";
 import Box from '@mui/material/Box';
 import "./App.css";
 import Paper from '@mui/material/Paper';
@@ -11,6 +11,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { useForm } from "react-hook-form";
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 export const App = () => {
 
@@ -67,13 +69,11 @@ export const App = () => {
     {
       id: 'editar',
       label: 'Editar',
-      paddingRight: "3rem",
       align: 'left'
     },
     {
       id: 'excluir',
       label: 'Excluir',
-      paddingRight: "3rem",
       align: 'left'
     },
   ];
@@ -189,6 +189,16 @@ export const App = () => {
                     <TableCell align="left">{row.nome}</TableCell>
                     <TableCell align="left">{row.endereco}</TableCell>
                     <TableCell align="left">{row.cpf}</TableCell>
+                    <TableCell>
+                      <IconButton>
+                        <EditIcon fontSize="small" sx={{ color: "#1B5E20" }}/>
+                      </IconButton>
+                    </TableCell>
+                    <TableCell>
+                      <IconButton>
+                        <DeleteOutlineIcon fontSize="small" sx={{ color: "#B71C1C" }}/>
+                      </IconButton>
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
