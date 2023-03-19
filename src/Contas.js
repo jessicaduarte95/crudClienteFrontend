@@ -64,7 +64,7 @@ export const Contas = () => {
                             Cadastro de Conta
                         </Typography>
                     </Grid>
-                    <Grid item style={{display: "flex", direction: "column", height: '4.5rem', paddingLeft: "1rem", paddingTop: "0.6rem"}}>
+                    <Grid item style={{display: "flex", direction: "column", height: '4.5rem', paddingLeft: "1rem", paddingTop: "0.9rem"}}>
                         <Grid item sm={4} style={{height: '3.3rem', padding: "0rem"}}>
                             <Box
                             component="form"
@@ -78,7 +78,7 @@ export const Contas = () => {
                             </Box>
                         </Grid>
                     </Grid>
-                    <Grid container item sm={12} style={{marginTop: "1.5rem", paddingLeft: "1rem"}}>
+                    <Grid container item sm={12} style={{marginTop: "1.2rem", paddingLeft: "1rem"}}>
                         <Grid item sm={8}>
                             <Link to='/' style={{height:"0px", textDecoration: "none"}}>
                                 <Button type="submit" variant="contained" style={{height: '2.5rem', width: "6.5rem"}}>Cliente</Button>
