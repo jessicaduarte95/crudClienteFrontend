@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import  { Grid, Button, TextField }  from "@mui/material";
 import { useForm } from "react-hook-form";
+import Axios from 'axios';
 
 const style = {
   position: 'absolute',
@@ -18,11 +19,23 @@ const style = {
 
 export const ModalEditar = (props) => {
 
-    const {openEditarCliente, handleCloseEditarCliente, rowData} = props;
+    const {openEditarCliente, handleCloseEditarCliente, rowData, idCliente, allData} = props;
     const { register, handleSubmit, reset } = useForm();
 
-    const onSubmit = (data) => {
-        console.log("data: ", data);
+    const onSubmit = async (data) => {
+        await Axios.put(`http://localhost:8080/cliente/${idCliente}`, {
+        nome: data.nome,
+        endereco: data.endereco,
+        cpf: data.cpf
+        }
+            ).then((response) => {
+            console.log(response.data)
+        }).catch((error) => {
+            console.log(error)
+        })
+        allData()
+        handleCloseEditarCliente();
+        reset();
     };
 
     const handleClose = () => {
@@ -75,11 +88,11 @@ export const ModalEditar = (props) => {
                 <TextField id="cpf" label="CPF" variant="outlined"  {...register("cpf", { required: true })} defaultValue={rowData.cpf} style={{width: "100%"}}/>
             </Box>
         </Grid>
-        </form>
         <Grid container item sm={12} style={{marginTop: "1rem", justifyContent: "flex-end"}}>
-        <Button variant="outlined" style={{height: '2.5rem', width: "6.5rem"}} onClick={handleClose}>Cancelar</Button>
-        <Button type="submit" variant="contained" style={{height: '2.5rem', width: "5.5rem", marginLeft: "0.7rem"}}>Salvar</Button>
+            <Button variant="outlined" style={{height: '2.5rem', width: "6.5rem"}} onClick={handleClose}>Cancelar</Button>
+            <Button type="submit" variant="contained" style={{height: '2.5rem', width: "5.5rem", marginLeft: "0.7rem"}}>Salvar</Button>
         </Grid>
+        </form>
     </Box>
     </Modal>
   );
