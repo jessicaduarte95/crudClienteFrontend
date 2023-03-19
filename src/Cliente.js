@@ -16,8 +16,9 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import TablePagination from '@mui/material/TablePagination';
 import { ModalExcluir } from "./ModalCliente/ModalExcluir";
 import { ModalEditar } from "./ModalCliente/ModalEditar";
+import { Link } from 'react-router-dom';
 
-export const App = () => {
+export const Cliente = () => {
 
   const containerStyle = {
     flexDirection: "row"
@@ -195,8 +196,12 @@ export const App = () => {
             </Grid>
             <Grid container item sm={12}>
               <Grid item sm={8}>
-                <Button type="submit" variant="contained" style={{height: '2.5rem', width: "6.5rem"}}>Contas</Button>
-                <Button type="submit" variant="contained" style={{height: '2.5rem', width: "8.5rem", marginLeft: "0.5rem"}}>Movimentação</Button>
+                <Link to='/contas' style={{height:"0px", textDecoration: "none"}}>
+                  <Button type="submit" variant="contained" style={{height: '2.5rem', width: "6.5rem"}}>Contas</Button>
+                </Link>
+                <Link to='/movimentacao' style={{height:"0px", textDecoration: "none"}}>
+                  <Button type="submit" variant="contained" style={{height: '2.5rem', width: "8.5rem", marginLeft: "0.5rem"}}>Movimentação</Button>
+                </Link>
               </Grid>
               <Grid item sm={4} style={{height: '2.5rem', display: "flex", justifyContent: "flex-end"}}>
                 <Button type="submit" variant="contained" style={{height: '2.5rem', width: "7.5rem"}}>Adicionar</Button>
