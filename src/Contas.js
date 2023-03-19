@@ -74,7 +74,7 @@ export const Contas = () => {
                             noValidate
                             autoComplete="off"
                             >
-                            <TextField id="nomeCpf" label="Nome e CPF" variant="outlined" {...register("nome", { required: true })} style={{width: "100%"}}/>
+                            <TextField id="numConta" label="Número da Conta" variant="outlined" {...register("nome", { required: true })} style={{width: "100%"}}/>
                             </Box>
                         </Grid>
                     </Grid>
