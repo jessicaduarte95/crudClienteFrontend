@@ -152,7 +152,7 @@ export const Cliente = () => {
           <form id="adicionar" onSubmit={handleSubmit(onSubmit)} style={{ width: "inherit"}}>
             <Grid item sm={12} style={{height: "3rem", marginBottom: "0.2rem"}}>
               <Typography style={{fontFamily: 'Arial', fontSize: '1.8rem', paddingLeft: "0.1rem", color: "#424242"}}>
-                Cliente
+                Cadastro de Cliente
               </Typography>
             </Grid>
             <Grid item style={{display: "flex", direction: "column", height: '4.5rem'}}>
