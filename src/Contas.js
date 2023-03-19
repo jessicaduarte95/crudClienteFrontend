@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import  { Grid, Typography, TextField, Button }  from "@mui/material";
 import { useForm } from "react-hook-form";
 import Box from '@mui/material/Box';
@@ -7,6 +7,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import Axios from 'axios';
 
 export const Contas = () => {
 
@@ -35,7 +36,6 @@ export const Contas = () => {
         display: "flex", 
         direction: "column", 
         width: "100%",
-        // alignItems: "flex-start",
         marginRight: "16rem",
         marginTop: "2.5rem",
         height: "12rem",
@@ -51,16 +51,33 @@ export const Contas = () => {
     }
 
     const { register, handleSubmit, reset } = useForm({defaultValues});
-
-    const [age, setAge] = useState('');
-
-    const handleChange = (event) => {
-        setAge(event.target.value);
+    const [optionsNomeCPF, setOptionsNomeCPF] = useState({NomeCPF: []})
+    const [changeOption, setChangeOption] = useState('');
+    const handleChangeOption = (event) => {
+        setChangeOption(event.target.value);
     };
 
     const onSubmit = () => {
         console.log("Dentro do onsubmit");
     }
+
+    const nomeCPF = () => {
+        Axios.get("http://localhost:8080/cliente")
+        .then((response) => {
+            let allOptions ={
+                NomeCPF: []
+            }
+            allOptions.NomeCPF = [{value: "", label: ""}, ...response.data.map(e => { return { value: e.idCliente, label: e.nome + " - " + e.cpf}})];
+            setOptionsNomeCPF(allOptions)
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+    }
+
+    useEffect(() => {
+        nomeCPF()
+      }, [])
 
     return (
         <Grid container style={containerStyle}>
@@ -82,13 +99,13 @@ export const Contas = () => {
                                     <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
-                                    value={age}
+                                    value={changeOption}
                                     label="Nome e CPF"
-                                    onChange={handleChange}
+                                    onChange={handleChangeOption}
                                     >
-                                    <MenuItem value={10}>Ten</MenuItem>
-                                    <MenuItem value={20}>Twenty</MenuItem>
-                                    <MenuItem value={30}>Thirty</MenuItem>
+                                    {
+                                     optionsNomeCPF.NomeCPF.map((e,i) => <MenuItem key={i} value={e.value}>{e.label}</MenuItem>)
+                                    }
                                     </Select>
                                 </FormControl>
                             </Box>
