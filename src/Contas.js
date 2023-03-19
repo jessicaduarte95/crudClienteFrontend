@@ -1,8 +1,12 @@
-
+import React, {useState} from 'react';
 import  { Grid, Typography, TextField, Button }  from "@mui/material";
 import { useForm } from "react-hook-form";
 import Box from '@mui/material/Box';
 import { Link } from 'react-router-dom';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 export const Contas = () => {
 
@@ -48,6 +52,12 @@ export const Contas = () => {
 
     const { register, handleSubmit, reset } = useForm({defaultValues});
 
+    const [age, setAge] = useState('');
+
+    const handleChange = (event) => {
+        setAge(event.target.value);
+    };
+
     const onSubmit = () => {
         console.log("Dentro do onsubmit");
     }
@@ -65,7 +75,25 @@ export const Contas = () => {
                         </Typography>
                     </Grid>
                     <Grid item style={{display: "flex", direction: "column", height: '4.5rem', paddingLeft: "1rem", paddingTop: "0.9rem"}}>
-                        <Grid item sm={4} style={{height: '3.3rem', padding: "0rem"}}>
+                        <Grid item sm={6} style={{paddingRight: "1rem", marginTop: "0.2rem"}}>
+                            <Box sx={{ minWidth: 120 }}>
+                                <FormControl fullWidth>
+                                    <InputLabel id="demo-simple-select-label">Nome e CPF</InputLabel>
+                                    <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={age}
+                                    label="Nome e CPF"
+                                    onChange={handleChange}
+                                    >
+                                    <MenuItem value={10}>Ten</MenuItem>
+                                    <MenuItem value={20}>Twenty</MenuItem>
+                                    <MenuItem value={30}>Thirty</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </Box>
+                        </Grid>
+                        <Grid item sm={6} style={{height: '3.3rem', padding: "0rem",  marginTop: "0.1rem"}}>
                             <Box
                             component="form"
                             sx={{
@@ -78,7 +106,7 @@ export const Contas = () => {
                             </Box>
                         </Grid>
                     </Grid>
-                    <Grid container item sm={12} style={{marginTop: "1.2rem", paddingLeft: "1rem"}}>
+                    <Grid container item sm={12} style={{marginTop: "1rem", paddingLeft: "1rem"}}>
                         <Grid item sm={8}>
                             <Link to='/' style={{height:"0px", textDecoration: "none"}}>
                                 <Button type="submit" variant="contained" style={{height: '2.5rem', width: "6.5rem"}}>Cliente</Button>
