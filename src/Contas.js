@@ -46,8 +46,7 @@ export const Contas = () => {
     }
 
     const defaultValues = {
-        nome: "",
-        numeroConta: "",
+        numConta: "",
     }
 
     const { register, handleSubmit, reset } = useForm({defaultValues});
@@ -57,8 +56,18 @@ export const Contas = () => {
         setChangeOption(event.target.value);
     };
 
-    const onSubmit = () => {
-        console.log("Dentro do onsubmit");
+    const onSubmit = async (data) => {
+      
+        await Axios.post("http://localhost:8080/conta", {
+            idCliente: changeOption,
+            numConta: data.numConta,
+            }
+            ).then((response) => {
+                console.log(response.data)
+            }).catch((error) => {
+                console.log(error)
+            })
+        reset();
     }
 
     const nomeCPF = () => {
@@ -119,17 +128,17 @@ export const Contas = () => {
                             noValidate
                             autoComplete="off"
                             >
-                            <TextField id="numConta" label="Número da Conta" variant="outlined" {...register("nome", { required: true })} style={{width: "100%"}}/>
+                            <TextField id="numConta" label="Número da Conta" variant="outlined" {...register("numConta", { required: true })} style={{width: "100%"}}/>
                             </Box>
                         </Grid>
                     </Grid>
                     <Grid container item sm={12} style={{marginTop: "1rem", paddingLeft: "1rem"}}>
                         <Grid item sm={8}>
                             <Link to='/' style={{height:"0px", textDecoration: "none"}}>
-                                <Button type="submit" variant="contained" style={{height: '2.5rem', width: "6.5rem"}}>Cliente</Button>
+                                <Button variant="contained" style={{height: '2.5rem', width: "6.5rem"}}>Cliente</Button>
                             </Link>
                             <Link to='/movimentacao' style={{height:"0px", textDecoration: "none"}}>
-                                <Button type="submit" variant="contained" style={{height: '2.5rem', width: "8.5rem", marginLeft: "0.5rem"}}>Movimentação</Button>
+                                <Button variant="contained" style={{height: '2.5rem', width: "8.5rem", marginLeft: "0.5rem"}}>Movimentação</Button>
                             </Link>
                         </Grid>
                         <Grid item sm={4} style={{height: '2.5rem', display: "flex", justifyContent: "flex-end"}}>
