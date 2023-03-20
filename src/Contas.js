@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import  { Grid, Typography, TextField, Button }  from "@mui/material";
+import  { Grid, Typography, TextField, Button, IconButton }  from "@mui/material";
 import { useForm } from "react-hook-form";
 import Box from '@mui/material/Box';
 import { Link } from 'react-router-dom';
@@ -15,6 +15,9 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import TablePagination from '@mui/material/TablePagination';
 
 export const Contas = () => {
 
@@ -88,10 +91,22 @@ export const Contas = () => {
     }
 
     const { register, handleSubmit, reset } = useForm({defaultValues});
-    const [optionsNomeCPF, setOptionsNomeCPF] = useState({NomeCPF: []})
+    const [optionsNomeCPF, setOptionsNomeCPF] = useState({NomeCPF: []});
     const [changeOption, setChangeOption] = useState('');
+    const [ dadosConta, setDadosContas] = useState([]);
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
     const handleChangeOption = (event) => {
         setChangeOption(event.target.value);
+    };
+
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+    };
+
+    const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
     };
 
     const onSubmit = async (data) => {
@@ -122,8 +137,19 @@ export const Contas = () => {
         })
     }
 
+    const listarContas = () => {
+        Axios.get("http://localhost:8080/conta")
+        .then((response) => {
+            setDadosContas(response.data)
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+    }
+
     useEffect(() => {
         nomeCPF()
+        listarContas()
       }, [])
 
     return (
@@ -201,8 +227,39 @@ export const Contas = () => {
                                     ))}
                                     </TableRow>
                                 </TableHead>
+                                <TableBody>
+                                    {dadosConta !== undefined ? dadosConta
+                                        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                        .map((row) => (
+                                        <TableRow key={row.idConta} role="checkbox" tabIndex={-1}>
+                                             <TableCell align="left">{row.cliente.nome}</TableCell>
+                                            <TableCell align="left">{row.cliente.cpf}</TableCell>
+                                            <TableCell align="left">{row.numConta}</TableCell>
+                                            <TableCell>
+                                                <IconButton>
+                                                    <EditIcon fontSize="small" sx={{ color: "#1B5E20" }}/>
+                                                </IconButton>
+                                            </TableCell>
+                                            <TableCell>
+                                                <IconButton>
+                                                    <DeleteOutlineIcon fontSize="small" sx={{ color: "#B71C1C" }}/>
+                                                </IconButton>
+                                            </TableCell>
+                                        </TableRow>
+                                    )): ""}
+                                </TableBody>
                             </Table>
                         </TableContainer>
+                        <TablePagination
+                            style={{width: "100%"}}
+                            rowsPerPageOptions={[5, 10, 25]}
+                            component="div"
+                            count={dadosConta.length}
+                            rowsPerPage={rowsPerPage}
+                            page={page}
+                            onPageChange={handleChangePage}
+                            onRowsPerPageChange={handleChangeRowsPerPage}
+                        />
                     </Paper>
                 </Grid>
             </Grid>
