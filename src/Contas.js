@@ -8,6 +8,13 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Axios from 'axios';
+import Paper from '@mui/material/Paper';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 
 export const Contas = () => {
 
@@ -44,6 +51,37 @@ export const Contas = () => {
         paddingRight: "1.4rem",
         flexDirection: "column",
     }
+
+    const columns = [
+        { 
+            id: 'nome', 
+            label: 'Nome',  
+            align: 'left', 
+            width: "35%"
+        },
+        {
+            id: 'cpf',
+            label: 'CPF',
+            align: 'left',
+            width: "22%"
+          },
+        {
+            id: 'numConta',
+            label: 'Número da Conta',
+            align: 'left',
+            width: "22%"
+        },
+        {
+            id: 'editar',
+            label: 'Editar',
+            align: 'left'
+        },
+        {
+            id: 'excluir',
+            label: 'Excluir',
+            align: 'left'
+        },
+    ]
 
     const defaultValues = {
         numConta: "",
@@ -146,6 +184,27 @@ export const Contas = () => {
                         </Grid>
                     </Grid>
                 </form>
+                <Grid item style={{ padding: "0rem", marginTop: "2.5rem", display: "flex", height: "35rem", width: "100%", marginRight: "16rem"}}>
+                    <Paper sx={{overflow: 'hidden', height: "28rem", width: "100%" }}>
+                        <TableContainer sx={{ maxHeight: 440 }}>
+                            <Table stickyHeader aria-label="sticky table">
+                                <TableHead>
+                                    <TableRow>
+                                    {columns.map((column) => (
+                                        <TableCell
+                                        key={column.id}
+                                        align={column.align}
+                                        sx={{  fontWeight: 'bold', paddingRight: column.paddingRight, width: column.width }}
+                                        >
+                                        {column.label}
+                                        </TableCell>
+                                    ))}
+                                    </TableRow>
+                                </TableHead>
+                            </Table>
+                        </TableContainer>
+                    </Paper>
+                </Grid>
             </Grid>
         </Grid>
     )
