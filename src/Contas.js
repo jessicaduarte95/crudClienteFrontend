@@ -19,6 +19,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import TablePagination from '@mui/material/TablePagination';
 import { ModalExcluir } from './ModalContas/ModalExcluir';
+import { ModalEditar } from './ModalContas/ModalEditar';
 
 export const Contas = () => {
 
@@ -100,6 +101,9 @@ export const Contas = () => {
     const [openExcluirConta, setOpenExcluirConta] = useState(false);
     const handleOpenExcluirConta = () => setOpenExcluirConta(true);
     const handleCloseExcluirConta = () => setOpenExcluirConta(false);
+    const [openEditarConta, setOpenEditarConta] = useState(false);
+    const handleOpenEditarConta = () => setOpenEditarConta(true);
+    const handleCloseEditarConta = () => setOpenEditarConta(false);
     const [idConta, setIdConta] = useState('');
     const handleChangeOption = (event) => {
         setChangeOption(event.target.value);
@@ -241,7 +245,7 @@ export const Contas = () => {
                                             <TableCell align="left">{row.cliente.cpf}</TableCell>
                                             <TableCell align="left">{row.numConta}</TableCell>
                                             <TableCell>
-                                                <IconButton>
+                                                <IconButton onClick={() => {handleOpenEditarConta()}}>
                                                     <EditIcon fontSize="small" sx={{ color: "#1B5E20" }}/>
                                                 </IconButton>
                                             </TableCell>
@@ -269,6 +273,7 @@ export const Contas = () => {
                 </Grid>
             </Grid>
             <ModalExcluir openExcluirConta={openExcluirConta} handleCloseExcluirConta={handleCloseExcluirConta} id={idConta} />
+            <ModalEditar openEditarConta={openEditarConta} handleCloseEditarConta={handleCloseEditarConta} />
         </Grid>
     )
 }
