@@ -18,6 +18,7 @@ import TableRow from '@mui/material/TableRow';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import TablePagination from '@mui/material/TablePagination';
+import { ModalExcluir } from './ModalContas/ModalExcluir';
 
 export const Contas = () => {
 
@@ -96,6 +97,9 @@ export const Contas = () => {
     const [ dadosConta, setDadosContas] = useState([]);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
+    const [openExcluirConta, setOpenExcluirConta] = useState(false);
+    const handleOpenExcluirConta = () => setOpenExcluirConta(true);
+    const handleCloseExcluirConta = () => setOpenExcluirConta(false);
     const handleChangeOption = (event) => {
         setChangeOption(event.target.value);
     };
@@ -241,7 +245,7 @@ export const Contas = () => {
                                                 </IconButton>
                                             </TableCell>
                                             <TableCell>
-                                                <IconButton>
+                                                <IconButton onClick={() => {handleOpenExcluirConta()}}>
                                                     <DeleteOutlineIcon fontSize="small" sx={{ color: "#B71C1C" }}/>
                                                 </IconButton>
                                             </TableCell>
@@ -263,6 +267,7 @@ export const Contas = () => {
                     </Paper>
                 </Grid>
             </Grid>
+            <ModalExcluir openExcluirConta={openExcluirConta} handleCloseExcluirConta={handleCloseExcluirConta} />
         </Grid>
     )
 }
