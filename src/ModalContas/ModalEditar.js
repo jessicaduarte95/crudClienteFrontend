@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
@@ -17,14 +17,18 @@ const style = {
   p: 4
 };
 
-const onSubmit = () => {
-
-}
-
 export const ModalEditar = (props) => {
 
-    const {handleCloseEditarConta, openEditarConta} = props;
+    const {handleCloseEditarConta, openEditarConta, rowData, id} = props;
     const { register, handleSubmit, reset } = useForm();
+
+    const onSubmit = () => {
+        
+    }
+    
+    useEffect(() => {
+        console.log("rowData", rowData);
+      }, [rowData])
 
     return (
         <Modal
@@ -47,7 +51,7 @@ export const ModalEditar = (props) => {
                         noValidate
                         autoComplete="off"
                         >
-                        <TextField id="NomeCPF" label="Nome e CPF" variant="outlined" {...register("NomeCPF", { required: true })} disabled style={{width: "100%", marginBottom: "1rem"}}/>
+                        <TextField id="nome" label="Nome" variant="outlined" {...register("nome", { required: true })} disabled style={{width: "100%", marginBottom: "1rem"}}/>
                     </Box>
                     <Box
                         component="form"
@@ -57,7 +61,17 @@ export const ModalEditar = (props) => {
                         noValidate
                         autoComplete="off"
                         >
-                        <TextField id="numConta" label="Número da Conta" variant="outlined"  {...register("numConta", { required: true })} style={{width: "100%"}}/>
+                        <TextField id="cpf" label="CPF" variant="outlined" {...register("cpf", { required: true })} disabled style={{width: "100%", marginBottom: "1rem"}}/>
+                    </Box>
+                    <Box
+                        component="form"
+                        sx={{
+                        '& > :not(style)': { m: 0.3},
+                        }}
+                        noValidate
+                        autoComplete="off"
+                        >
+                        <TextField id="numConta" label="Número da Conta" variant="outlined"  defaultValue={rowData.numConta} {...register("numConta", { required: true })} style={{width: "100%"}}/>
                     </Box>
                 </Grid>
                 <Grid container item sm={12} style={{marginTop: "1rem", justifyContent: "flex-end"}}>

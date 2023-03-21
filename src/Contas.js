@@ -105,6 +105,7 @@ export const Contas = () => {
     const handleOpenEditarConta = () => setOpenEditarConta(true);
     const handleCloseEditarConta = () => setOpenEditarConta(false);
     const [idConta, setIdConta] = useState('');
+    const [rowData, setRowData] = useState('');
     const handleChangeOption = (event) => {
         setChangeOption(event.target.value);
     };
@@ -245,7 +246,7 @@ export const Contas = () => {
                                             <TableCell align="left">{row.cliente.cpf}</TableCell>
                                             <TableCell align="left">{row.numConta}</TableCell>
                                             <TableCell>
-                                                <IconButton onClick={() => {handleOpenEditarConta()}}>
+                                                <IconButton onClick={() => {handleOpenEditarConta(); setRowData(row); setIdConta(row.idCliente)}}>
                                                     <EditIcon fontSize="small" sx={{ color: "#1B5E20" }}/>
                                                 </IconButton>
                                             </TableCell>
@@ -273,7 +274,7 @@ export const Contas = () => {
                 </Grid>
             </Grid>
             <ModalExcluir openExcluirConta={openExcluirConta} handleCloseExcluirConta={handleCloseExcluirConta} id={idConta} />
-            <ModalEditar openEditarConta={openEditarConta} handleCloseEditarConta={handleCloseEditarConta} />
+            <ModalEditar openEditarConta={openEditarConta} handleCloseEditarConta={handleCloseEditarConta} id={idConta} rowData={rowData} />
         </Grid>
     )
 }
