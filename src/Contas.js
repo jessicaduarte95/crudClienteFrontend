@@ -100,6 +100,7 @@ export const Contas = () => {
     const [openExcluirConta, setOpenExcluirConta] = useState(false);
     const handleOpenExcluirConta = () => setOpenExcluirConta(true);
     const handleCloseExcluirConta = () => setOpenExcluirConta(false);
+    const [idConta, setIdConta] = useState('');
     const handleChangeOption = (event) => {
         setChangeOption(event.target.value);
     };
@@ -245,7 +246,7 @@ export const Contas = () => {
                                                 </IconButton>
                                             </TableCell>
                                             <TableCell>
-                                                <IconButton onClick={() => {handleOpenExcluirConta()}}>
+                                                <IconButton onClick={() => {handleOpenExcluirConta(); setIdConta(row.idConta);}}>
                                                     <DeleteOutlineIcon fontSize="small" sx={{ color: "#B71C1C" }}/>
                                                 </IconButton>
                                             </TableCell>
@@ -267,7 +268,7 @@ export const Contas = () => {
                     </Paper>
                 </Grid>
             </Grid>
-            <ModalExcluir openExcluirConta={openExcluirConta} handleCloseExcluirConta={handleCloseExcluirConta} />
+            <ModalExcluir openExcluirConta={openExcluirConta} handleCloseExcluirConta={handleCloseExcluirConta} id={idConta} />
         </Grid>
     )
 }
