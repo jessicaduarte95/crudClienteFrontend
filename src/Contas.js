@@ -273,7 +273,7 @@ export const Contas = () => {
                     </Paper>
                 </Grid>
             </Grid>
-            <ModalExcluir openExcluirConta={openExcluirConta} handleCloseExcluirConta={handleCloseExcluirConta} id={idConta} />
+            <ModalExcluir openExcluirConta={openExcluirConta} handleCloseExcluirConta={handleCloseExcluirConta} id={idConta} listarContas={listarContas} />
             <ModalEditar openEditarConta={openEditarConta} handleCloseEditarConta={handleCloseEditarConta} id={idConta} rowData={rowData} />
         </Grid>
     )
