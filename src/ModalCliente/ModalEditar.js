@@ -46,7 +46,7 @@ export const ModalEditar = (props) => {
   return (
     <Modal
     open={openEditarCliente}
-    onClose={handleCloseEditarCliente}
+    onClose={handleClose}
     aria-labelledby="modal-modal-title"
     aria-describedby="modal-modal-description"
     >

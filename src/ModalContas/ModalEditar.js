@@ -25,6 +25,11 @@ export const ModalEditar = (props) => {
     const onSubmit = () => {
         
     }
+
+    const handleClose = () => {
+        handleCloseEditarConta();
+        reset();
+    }
     
     useEffect(() => {
         console.log("rowData", rowData);
@@ -33,7 +38,7 @@ export const ModalEditar = (props) => {
     return (
         <Modal
         open={openEditarConta}
-        onClose={handleCloseEditarConta}
+        onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         >
@@ -75,7 +80,7 @@ export const ModalEditar = (props) => {
                     </Box>
                 </Grid>
                 <Grid container item sm={12} style={{marginTop: "1rem", justifyContent: "flex-end"}}>
-                    <Button variant="outlined" style={{height: '2.5rem', width: "6.5rem"}} onClick={handleCloseEditarConta}>Cancelar</Button>
+                    <Button variant="outlined" style={{height: '2.5rem', width: "6.5rem"}} onClick={handleClose}>Cancelar</Button>
                     <Button type="submit" variant="contained" style={{height: '2.5rem', width: "5.5rem", marginLeft: "0.7rem"}}>Salvar</Button>
                 </Grid>
                 </form>

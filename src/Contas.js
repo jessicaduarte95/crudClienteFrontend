@@ -41,7 +41,7 @@ export const Contas = () => {
     const secondPart = {
         paddingLeft: "13rem",
         backgroundColor: "#E0E0E0",
-        height: "100vh"
+        height: "100%"
     }
     
     const adicionarConta = {
