@@ -32,7 +32,6 @@ export const ModalEditar = (props) => {
     }
     
     useEffect(() => {
-        console.log("rowData", rowData);
       }, [rowData])
 
     return (
@@ -56,7 +55,7 @@ export const ModalEditar = (props) => {
                         noValidate
                         autoComplete="off"
                         >
-                        <TextField id="nome" label="Nome" variant="outlined" {...register("nome", { required: true })} disabled style={{width: "100%", marginBottom: "1rem"}}/>
+                        <TextField id="nome" label="Nome" variant="outlined" defaultValue={ rowData.length === 0 ? "" : rowData.cliente.nome} {...register("nome", { required: true })} disabled style={{width: "100%", marginBottom: "1rem"}}/>
                     </Box>
                     <Box
                         component="form"
@@ -66,7 +65,7 @@ export const ModalEditar = (props) => {
                         noValidate
                         autoComplete="off"
                         >
-                        <TextField id="cpf" label="CPF" variant="outlined" {...register("cpf", { required: true })} disabled style={{width: "100%", marginBottom: "1rem"}}/>
+                        <TextField id="cpf" label="CPF" variant="outlined" defaultValue={ rowData.length === 0 ? "" : rowData.cliente.cpf} {...register("cpf", { required: true })} disabled style={{width: "100%", marginBottom: "1rem"}}/>
                     </Box>
                     <Box
                         component="form"
