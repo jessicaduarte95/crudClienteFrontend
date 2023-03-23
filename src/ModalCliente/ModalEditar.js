@@ -28,7 +28,7 @@ export const ModalEditar = (props) => {
         endereco: data.endereco,
         cpf: data.cpf
         }
-            ).then((response) => {
+        ).then((response) => {
             console.log(response.data)
         }).catch((error) => {
             console.log(error)

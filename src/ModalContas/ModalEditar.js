@@ -19,11 +19,21 @@ const style = {
 
 export const ModalEditar = (props) => {
 
-    const {handleCloseEditarConta, openEditarConta, rowData, id} = props;
+    const {handleCloseEditarConta, openEditarConta, rowData, idConta, listarContas} = props;
     const { register, handleSubmit, reset } = useForm();
 
-    const onSubmit = () => {
-        
+    const onSubmit = async (data) => {
+        await Axios.put(`http://localhost:8080/conta/${idConta}`, {
+            numConta: data.numConta
+        }
+        ).then((response) => {
+            console.log(response.data)
+        }).catch((error) => {
+            console.log(error)
+        })
+        listarContas()
+        handleCloseEditarConta();
+        reset();
     }
 
     const handleClose = () => {
@@ -55,7 +65,7 @@ export const ModalEditar = (props) => {
                         noValidate
                         autoComplete="off"
                         >
-                        <TextField id="nome" label="Nome" variant="outlined" defaultValue={ rowData.length === 0 ? "" : rowData.cliente.nome} {...register("nome", { required: true })} disabled style={{width: "100%", marginBottom: "1rem"}}/>
+                        <TextField id="nome" label="Nome" variant="outlined" defaultValue={ rowData.length === 0 ? "" : rowData.cliente.nome} {...register("nome")} disabled style={{width: "100%", marginBottom: "1rem"}}/>
                     </Box>
                     <Box
                         component="form"
@@ -65,7 +75,7 @@ export const ModalEditar = (props) => {
                         noValidate
                         autoComplete="off"
                         >
-                        <TextField id="cpf" label="CPF" variant="outlined" defaultValue={ rowData.length === 0 ? "" : rowData.cliente.cpf} {...register("cpf", { required: true })} disabled style={{width: "100%", marginBottom: "1rem"}}/>
+                        <TextField id="cpf" label="CPF" variant="outlined" defaultValue={ rowData.length === 0 ? "" : rowData.cliente.cpf} {...register("cpf")} disabled style={{width: "100%", marginBottom: "1rem"}}/>
                     </Box>
                     <Box
                         component="form"

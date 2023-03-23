@@ -247,7 +247,7 @@ export const Contas = () => {
                                             <TableCell align="left">{row.cliente.cpf}</TableCell>
                                             <TableCell align="left">{row.numConta}</TableCell>
                                             <TableCell>
-                                                <IconButton onClick={() => {handleOpenEditarConta(); setRowData(row); setIdConta(row.idCliente)}}>
+                                                <IconButton onClick={() => {handleOpenEditarConta(); setRowData(row); setIdConta(row.idConta)}}>
                                                     <EditIcon fontSize="small" sx={{ color: "#1B5E20" }}/>
                                                 </IconButton>
                                             </TableCell>
@@ -275,7 +275,7 @@ export const Contas = () => {
                 </Grid>
             </Grid>
             <ModalExcluir openExcluirConta={openExcluirConta} handleCloseExcluirConta={handleCloseExcluirConta} id={idConta} listarContas={listarContas} />
-            <ModalEditar openEditarConta={openEditarConta} handleCloseEditarConta={handleCloseEditarConta} id={idConta} rowData={rowData} />
+            <ModalEditar openEditarConta={openEditarConta} handleCloseEditarConta={handleCloseEditarConta} idConta={idConta} rowData={rowData} listarContas={listarContas} />
         </Grid>
     )
 }
