@@ -131,6 +131,7 @@ export const Contas = () => {
                 console.log(error)
             })
         reset();
+        setChangeOption();
     }
 
     const nomeCPF = () => {
@@ -139,7 +140,7 @@ export const Contas = () => {
             let allOptions ={
                 NomeCPF: []
             }
-            allOptions.NomeCPF = [{value: "", label: ""}, ...response.data.map(e => { return { value: e.idCliente, label: e.nome + " - " + e.cpf}})];
+            allOptions.NomeCPF = [{value: "", label: <em>Nenhum</em>}, ...response.data.map(e => { return { value: e.idCliente, label: e.nome + " - " + e.cpf}})];
             setOptionsNomeCPF(allOptions)
         })
         .catch((error) => {
