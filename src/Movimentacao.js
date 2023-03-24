@@ -195,12 +195,12 @@ export const Movimentacao = () => {
                     </Grid>
                 </form>
                 <Grid container direction="row" style={{flexDirection: "column"}}>
-                    <Grid item style={{ height: '5rem', marginTop: "2.5rem", backgroundImage: "linear-gradient(90deg, #1A237E 0%, #5C6BC0 100%)", width: "40%"}}>
-                        <Typography style={{fontFamily: 'Arial', fontSize: '1.8rem', paddingLeft: "1rem", color: "white", display: "flex", alignItems: "center", height: "100%"}}>
+                    <Grid item style={{ height: '5rem', marginTop: "2.5rem", backgroundColor:"#9E9E9E", width: "30%"}}>
+                        <Typography style={{fontFamily: 'Arial', fontSize: '1.8rem', paddingLeft: "1rem", color: "Black", display: "flex", alignItems: "center", height: "100%"}}>
                             Extrato
                         </Typography>
                     </Grid>
-                    <Grid item style={{ padding: "0rem", display: "flex", height: "35rem", width: "40%", marginRight: "16rem"}}>
+                    <Grid item style={{ padding: "0rem", display: "flex", height: "35rem", width: "30%", marginRight: "16rem"}}>
                         <Paper sx={{overflow: 'hidden', height: "28rem", width: "100%" }}>
                             <TableContainer sx={{ maxHeight: 440 }}>
                                 <Table stickyHeader aria-label="sticky table">
