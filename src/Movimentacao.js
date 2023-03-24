@@ -217,6 +217,7 @@ export const Movimentacao = () => {
                                         ))}
                                         </TableRow>
                                     </TableHead>
+                                    <caption>Saldo: R$</caption>
                                 </Table>
                             </TableContainer>
                         </Paper>
