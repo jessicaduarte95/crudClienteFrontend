@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import  { Grid, Typography, TextField, Button, IconButton }  from "@mui/material";
+import  { Grid, Typography, TextField, Button }  from "@mui/material";
 import { useForm } from "react-hook-form";
 import Axios from 'axios';
 import Box from '@mui/material/Box';
@@ -58,6 +58,7 @@ export const Movimentacao = () => {
 
     const onSubmit = () => {
         console.log("Teste");
+        reset()
     }
 
     const nomeCPF = () => {
