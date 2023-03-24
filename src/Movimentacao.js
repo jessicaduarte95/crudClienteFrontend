@@ -8,6 +8,13 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { Link } from 'react-router-dom';
+import Paper from '@mui/material/Paper';
+import Table from '@mui/material/Table';
+// import TableBody from '@mui/material/TableBody';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
 
 export const Movimentacao = () => {
 
@@ -44,6 +51,21 @@ export const Movimentacao = () => {
         paddingRight: "1.4rem",
         flexDirection: "column"
     }
+
+    const columns = [
+        { 
+            id: 'data', 
+            label: 'Data',  
+            align: 'left', 
+            width: "35%"
+        },
+        {
+            id: 'valor',
+            label: 'Valor',
+            align: 'left',
+            width: "22%"
+        },
+    ]
 
     const { register, handleSubmit, reset } = useForm();
     const [optionsNomeCPF, setOptionsNomeCPF] = useState({NomeCPF: []});
@@ -172,6 +194,34 @@ export const Movimentacao = () => {
                         </Grid>
                     </Grid>
                 </form>
+                <Grid container direction="row" style={{flexDirection: "column"}}>
+                    <Grid item style={{ height: '5rem', marginTop: "2.5rem", backgroundImage: "linear-gradient(90deg, #1A237E 0%, #5C6BC0 100%)", width: "40%"}}>
+                        <Typography style={{fontFamily: 'Arial', fontSize: '1.8rem', paddingLeft: "1rem", color: "white", display: "flex", alignItems: "center", height: "100%"}}>
+                            Extrato
+                        </Typography>
+                    </Grid>
+                    <Grid item style={{ padding: "0rem", display: "flex", height: "35rem", width: "40%", marginRight: "16rem"}}>
+                        <Paper sx={{overflow: 'hidden', height: "28rem", width: "100%" }}>
+                            <TableContainer sx={{ maxHeight: 440 }}>
+                                <Table stickyHeader aria-label="sticky table">
+                                    <TableHead>
+                                        <TableRow>
+                                        {columns.map((column) => (
+                                            <TableCell
+                                            key={column.id}
+                                            align={column.align}
+                                            sx={{  fontWeight: 'bold', paddingRight: column.paddingRight, width: column.width }}
+                                            >
+                                            {column.label}
+                                            </TableCell>
+                                        ))}
+                                        </TableRow>
+                                    </TableHead>
+                                </Table>
+                            </TableContainer>
+                        </Paper>
+                    </Grid>
+                </Grid>
             </Grid>
         </Grid>
     )
