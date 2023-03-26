@@ -122,7 +122,7 @@ export const Contas = () => {
     const onSubmit = async (data) => {
       
         await Axios.post("http://localhost:8080/conta", {
-            idCliente: changeOption,
+            cliente: {idCliente: changeOption},
             numConta: data.numConta,
             }
             ).then((response) => {
@@ -132,6 +132,7 @@ export const Contas = () => {
             })
         reset();
         setChangeOption();
+        listarContas();
     }
 
     const nomeCPF = () => {
