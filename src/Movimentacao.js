@@ -70,12 +70,20 @@ export const Movimentacao = () => {
     const { register, handleSubmit, reset } = useForm();
     const [optionsNomeCPF, setOptionsNomeCPF] = useState({NomeCPF: []});
     const [changeOption, setChangeOption] = useState('');
+    const [changeOptionNumConta, setChangeOptionNumConta] = useState('');
     const [depositarRetirar, setDepositarRetirar] = useState('');
+    const [optionsNumConta, setOptionsNumConta] = useState({numConta: []});
+    const [disabled, setDisabled] = useState(true);
+
     const handleChangeDepositarRetirar = (event) => {
         setDepositarRetirar(event.target.value);
     };
     const handleChangeOption = (event) => {
         setChangeOption(event.target.value);
+    };
+
+    const handleChangeOptionNumConta = (event) => {
+        setChangeOptionNumConta(event.target.value);
     };
 
     const onSubmit = () => {
@@ -97,9 +105,24 @@ export const Movimentacao = () => {
         })
     }
 
-    useEffect(() => {
+    useEffect(() => {  
         nomeCPF()
-      }, [])
+        if(changeOption !== ""){
+            setDisabled(false);
+            let idCliente = changeOption;
+            Axios.get(`http://localhost:8080/conta/filtro/${idCliente}`)
+            .then((response) => {
+                let allOptions = {
+                    numConta: []
+                }
+                allOptions.numConta = [{value: "", label: <em></em>}, ...response.data.map(e => {return {value: e.idConta, label: e.numConta}})];
+                setOptionsNumConta(allOptions)
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+        }
+      }, [changeOption])
 
     return (
         <Grid container style={containerStyle}>
@@ -139,12 +162,13 @@ export const Movimentacao = () => {
                                     <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
-                                    value={changeOption}
+                                    value={changeOptionNumConta}
                                     label="Número da Conta"
-                                    onChange={handleChangeOption}
+                                    onChange={handleChangeOptionNumConta}
+                                    disabled={disabled}
                                     >
                                     {
-                                     optionsNomeCPF.NomeCPF.map((e,i) => <MenuItem key={i} value={e.value}>{e.label}</MenuItem>)
+                                     optionsNumConta.numConta.map((e,i) => <MenuItem key={i} value={e.value}>{e.label}</MenuItem>)
                                     }
                                     </Select>
                                 </FormControl>
