@@ -86,9 +86,13 @@ export const Movimentacao = () => {
         setChangeOptionNumConta(event.target.value);
     };
 
-    const onSubmit = () => {
-        console.log("Teste");
-        reset()
+    const onSubmit = (data) => {
+        console.log("Teste", data, changeOption, changeOptionNumConta, depositarRetirar);
+        setDisabled(true);
+        setDepositarRetirar();
+        setChangeOption();
+        setChangeOptionNumConta();
+        reset();
     }
 
     const nomeCPF = () => {
@@ -107,7 +111,7 @@ export const Movimentacao = () => {
 
     useEffect(() => {  
         nomeCPF()
-        if(changeOption !== ""){
+        if(changeOption !== "" && changeOption !== undefined && changeOption !== null){
             setDisabled(false);
             let idCliente = changeOption;
             Axios.get(`http://localhost:8080/conta/filtro/${idCliente}`)
@@ -197,8 +201,8 @@ export const Movimentacao = () => {
                                     label="Depositar/Retirar"
                                     onChange={handleChangeDepositarRetirar}
                                     >
-                                        <MenuItem value={10}>Depositar</MenuItem>
-                                        <MenuItem value={20}>Retirar</MenuItem>
+                                        <MenuItem value={"Depositar"}>Depositar</MenuItem>
+                                        <MenuItem value={"Retirar"}>Retirar</MenuItem>
                                     </Select>
                                 </FormControl>
                             </Box>
