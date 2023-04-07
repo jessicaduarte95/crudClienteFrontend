@@ -74,6 +74,7 @@ export const Movimentacao = () => {
     const [depositarRetirar, setDepositarRetirar] = useState('');
     const [optionsNumConta, setOptionsNumConta] = useState({numConta: []});
     const [disabled, setDisabled] = useState(true);
+    const [valor, setValor] = useState();
 
     const handleChangeDepositarRetirar = (event) => {
         setDepositarRetirar(event.target.value);
@@ -88,6 +89,13 @@ export const Movimentacao = () => {
 
     const onSubmit = (data) => {
         console.log("Teste", data, changeOption, changeOptionNumConta, depositarRetirar);
+        const idCliente = changeOption;
+        const idConta = changeOptionNumConta;
+        if (depositarRetirar === 'Retirar'){
+            setValor(data.valor * (-1))
+        }else if (depositarRetirar === 'Depositar'){
+            setValor( Math.abs(data.valor))
+        }
         setDisabled(true);
         setDepositarRetirar();
         setChangeOption();
@@ -187,7 +195,7 @@ export const Movimentacao = () => {
                             noValidate
                             autoComplete="off"
                             >
-                            <TextField id="valor" label="Valor" variant="outlined" {...register("valor", { required: true })} style={{width: "100%"}}/>
+                            <TextField inputProps={{step: 1, min: 0, type: 'number'}} id="valor" label="Valor" variant="outlined" {...register("valor", { required: true })} style={{width: "100%"}}/>
                             </Box>
                         </Grid>
                         <Grid item sm={3} style={{ marginTop: "0.2rem"}}>
