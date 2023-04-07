@@ -94,7 +94,7 @@ export const Movimentacao = () => {
         await Axios.post("http://localhost:8080/movimentacao", {
             conta: {idConta: idConta},
             dataTime: dataTime,
-            valor: depositarRetirar === 'Retirar' ? data.valor * (-1) : Math.abs(data.valor)
+            valor: depositarRetirar === 'Retirar' ? data.valor.replace(/-/, "") * (-1) : Math.abs(data.valor)
 
         }).then((response) => {
             console.log(response.data)
