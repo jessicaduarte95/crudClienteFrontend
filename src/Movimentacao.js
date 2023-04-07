@@ -15,6 +15,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
+import moment from 'moment';
 
 export const Movimentacao = () => {
 
@@ -89,6 +90,7 @@ export const Movimentacao = () => {
 
     const onSubmit = (data) => {
         console.log("Teste", data, changeOption, changeOptionNumConta, depositarRetirar);
+        const dataTime = moment().format('DD/MM/YYYY HH:mm');
         const idCliente = changeOption;
         const idConta = changeOptionNumConta;
         if (depositarRetirar === 'Retirar'){
