@@ -70,11 +70,16 @@ export const Movimentacao = () => {
 
     const { register, handleSubmit, reset } = useForm();
     const [optionsNomeCPF, setOptionsNomeCPF] = useState({NomeCPF: []});
+    const [optionsNomeCPFPesquisa, setOptionsNomeCPFPesquisa] = useState({NomeCPF: []});
     const [changeOption, setChangeOption] = useState('');
+    const [changeOptionNomePesquisa, setChangeOptionNomePesquisa] = useState('');
     const [changeOptionNumConta, setChangeOptionNumConta] = useState('');
+    const [changeOptionContaPesquisa, setChangeOptionContaPesquisa] = useState('');
     const [depositarRetirar, setDepositarRetirar] = useState('');
     const [optionsNumConta, setOptionsNumConta] = useState({numConta: []});
+    const [optionsNumContaPesquisa, setOptionsNumContaPesquisa] = useState({numConta: []});
     const [disabled, setDisabled] = useState(true);
+    const [disabledPesquisar, setDisabledPesquisar] = useState(true);
 
     const handleChangeDepositarRetirar = (event) => {
         setDepositarRetirar(event.target.value);
@@ -85,6 +90,14 @@ export const Movimentacao = () => {
 
     const handleChangeOptionNumConta = (event) => {
         setChangeOptionNumConta(event.target.value);
+    };
+
+    const handleChangeOptionNomePesquisa = (event) => {
+        setChangeOptionNomePesquisa(event.target.value);
+    };
+
+    const handleChangeOptionContaPesquisa = (event) => {
+        setChangeOptionContaPesquisa(event.target.value);
     };
 
     const onSubmit = async (data) => {
@@ -117,6 +130,7 @@ export const Movimentacao = () => {
             }
             allOptions.NomeCPF = [{value: "", label: <em></em>}, ...response.data.map(e => { return { value: e.idCliente, label: e.nome + " - " + e.cpf}})];
             setOptionsNomeCPF(allOptions)
+            setOptionsNomeCPFPesquisa(allOptions)
         })
         .catch((error) => {
             console.log(error);
@@ -125,9 +139,13 @@ export const Movimentacao = () => {
 
     useEffect(() => {  
         nomeCPF()
-        if(changeOption !== "" && changeOption !== undefined && changeOption !== null){
-            setDisabled(false);
-            let idCliente = changeOption;
+        if((changeOption !== "" && changeOption !== undefined && changeOption !== null) || (changeOptionNomePesquisa !== "" && changeOptionNomePesquisa !== undefined && changeOptionNomePesquisa !== null)){
+            if(changeOption !== "" && changeOption !== undefined && changeOption !== null){
+                setDisabled(false);
+            }else if(changeOptionNomePesquisa !== "" && changeOptionNomePesquisa !== undefined && changeOptionNomePesquisa !== null){
+                setDisabledPesquisar(false)
+            }
+            let idCliente = (changeOption !== "" && changeOption !== undefined && changeOption !== null) ?changeOption : changeOptionNomePesquisa;
             Axios.get(`http://localhost:8080/conta/filtro/${idCliente}`)
             .then((response) => {
                 let allOptions = {
@@ -135,12 +153,13 @@ export const Movimentacao = () => {
                 }
                 allOptions.numConta = [{value: "", label: <em></em>}, ...response.data.map(e => {return {value: e.idConta, label: e.numConta}})];
                 setOptionsNumConta(allOptions)
+                setOptionsNumContaPesquisa(allOptions)
             })
             .catch((error) => {
                 console.log(error);
             })
         }
-      }, [changeOption])
+      }, [changeOption, changeOptionNomePesquisa])
 
     return (
         <Grid container style={containerStyle}>
@@ -236,13 +255,55 @@ export const Movimentacao = () => {
                         </Grid>
                     </Grid>
                 </form>
-                <Grid container direction="row" style={{flexDirection: "column"}}>
-                    <Grid item style={{ height: '5rem', marginTop: "2.5rem", backgroundColor:"#9E9E9E", width: "30%"}}>
-                        <Typography style={{fontFamily: 'Arial', fontSize: '1.8rem', paddingLeft: "1rem", color: "Black", display: "flex", alignItems: "center", height: "100%"}}>
-                            Extrato
-                        </Typography>
+                <Grid item style={{ height: '3rem', marginTop: "2.5rem", width: "100%", paddingLeft: "0.5rem"}}>
+                    <Typography style={{fontFamily: 'Arial', fontSize: '1.5rem', color: "Black", display: "flex", alignItems: "center", height: "100%"}}>
+                        Extrato de Conta
+                    </Typography>
+                </Grid>
+                <Grid container direction="row" style={{flexDirection: "column", marginRight: "16rem"}}>
+                    <Grid container item style={{ height: '6rem', backgroundColor:"white", width: "100%", marginBottom: "0.05rem", borderRadius: "4px", alignItems: "center"}}>
+                        <Grid item sm={4} style={{paddingRight: "1rem", marginTop: "0.2rem", paddingLeft: "1rem"}}>
+                            <Box sx={{ minWidth: 120 }}>
+                                <FormControl fullWidth>
+                                    <InputLabel id="demo-simple-select-label">Nome e CPF</InputLabel>
+                                    <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={changeOptionNomePesquisa}
+                                    label="Nome e CPF"
+                                    onChange={handleChangeOptionNomePesquisa}
+                                    >
+                                    {
+                                     optionsNomeCPFPesquisa.NomeCPF.map((e,i) => <MenuItem key={i} value={e.value}>{e.label}</MenuItem>)
+                                    }
+                                    </Select>
+                                </FormControl>
+                            </Box>
+                        </Grid>
+                        <Grid item sm={3} style={{paddingRight: "1rem", marginTop: "0.2rem"}}>
+                            <Box sx={{ minWidth: 120 }}>
+                                <FormControl fullWidth>
+                                    <InputLabel id="demo-simple-select-label">Número da Conta</InputLabel>
+                                    <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={changeOptionContaPesquisa}
+                                    label="Número da Conta"
+                                    onChange={handleChangeOptionContaPesquisa}
+                                    disabled={disabledPesquisar}
+                                    >
+                                    {
+                                     optionsNumContaPesquisa.numConta.map((e,i) => <MenuItem key={i} value={e.value}>{e.label}</MenuItem>)
+                                    }
+                                    </Select>
+                                </FormControl>
+                            </Box>
+                        </Grid>
+                        <Grid item sm={4.8} style={{height: '2.5rem', display: "flex", justifyContent: "flex-end"}}>
+                            <Button type="submit" variant="contained" style={{height: '2.5rem', width: "7.5rem"}}>Pesquizar</Button>
+                        </Grid>
                     </Grid>
-                    <Grid item style={{ padding: "0rem", display: "flex", height: "35rem", width: "30%", marginRight: "16rem"}}>
+                    <Grid item style={{ padding: "0rem", display: "flex", height: "35rem", width: "100%", marginRight: "16rem"}}>
                         <Paper sx={{overflow: 'hidden', height: "28rem", width: "100%" }}>
                             <TableContainer sx={{ maxHeight: 440 }}>
                                 <Table stickyHeader aria-label="sticky table">
