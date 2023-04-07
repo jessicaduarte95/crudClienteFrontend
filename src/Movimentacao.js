@@ -75,7 +75,6 @@ export const Movimentacao = () => {
     const [depositarRetirar, setDepositarRetirar] = useState('');
     const [optionsNumConta, setOptionsNumConta] = useState({numConta: []});
     const [disabled, setDisabled] = useState(true);
-    const [valor, setValor] = useState();
 
     const handleChangeDepositarRetirar = (event) => {
         setDepositarRetirar(event.target.value);
@@ -88,16 +87,21 @@ export const Movimentacao = () => {
         setChangeOptionNumConta(event.target.value);
     };
 
-    const onSubmit = (data) => {
-        console.log("Teste", data, changeOption, changeOptionNumConta, depositarRetirar);
+    const onSubmit = async (data) => {
         const dataTime = moment().format('DD/MM/YYYY HH:mm');
-        const idCliente = changeOption;
         const idConta = changeOptionNumConta;
-        if (depositarRetirar === 'Retirar'){
-            setValor(data.valor * (-1))
-        }else if (depositarRetirar === 'Depositar'){
-            setValor( Math.abs(data.valor))
-        }
+
+        await Axios.post("http://localhost:8080/movimentacao", {
+            conta: {idConta: idConta},
+            dataTime: dataTime,
+            valor: depositarRetirar === 'Retirar' ? data.valor * (-1) : Math.abs(data.valor)
+
+        }).then((response) => {
+            console.log(response.data)
+        }).catch((error) => {
+            console.log(error)
+        })
+
         setDisabled(true);
         setDepositarRetirar();
         setChangeOption();
