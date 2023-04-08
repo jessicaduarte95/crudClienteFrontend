@@ -80,6 +80,7 @@ export const Movimentacao = () => {
     const [optionsNumContaPesquisa, setOptionsNumContaPesquisa] = useState({numConta: []});
     const [disabled, setDisabled] = useState(true);
     const [disabledPesquisar, setDisabledPesquisar] = useState(true);
+    const [extrato, setExtrato] = useState({});
 
     const handleChangeDepositarRetirar = (event) => {
         setDepositarRetirar(event.target.value);
@@ -139,6 +140,12 @@ export const Movimentacao = () => {
 
     const pesquisar = () => {
         console.log("changeOptionNumConta: ", changeOptionContaPesquisa);
+        Axios.get(`http://localhost:8080/movimentacao/filtro/${changeOptionContaPesquisa}`)
+        .then((response) => {
+            setExtrato(response.data)
+        }).catch((error) => {
+            console.log(error)
+        })
         setChangeOptionContaPesquisa('')
         setChangeOptionNomePesquisa('')
     }
