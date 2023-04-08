@@ -10,7 +10,7 @@ import Select from '@mui/material/Select';
 import { Link } from 'react-router-dom';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
-// import TableBody from '@mui/material/TableBody';
+import TableBody from '@mui/material/TableBody';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
@@ -80,7 +80,7 @@ export const Movimentacao = () => {
     const [optionsNumContaPesquisa, setOptionsNumContaPesquisa] = useState({numConta: []});
     const [disabled, setDisabled] = useState(true);
     const [disabledPesquisar, setDisabledPesquisar] = useState(true);
-    const [extrato, setExtrato] = useState({});
+    const [extrato, setExtrato] = useState([]);
 
     const handleChangeDepositarRetirar = (event) => {
         setDepositarRetirar(event.target.value);
@@ -172,6 +172,7 @@ export const Movimentacao = () => {
                 console.log(error);
             })
         }
+        console.log("extrato: ", extrato);
       }, [changeOption, changeOptionNomePesquisa])
 
     return (
@@ -333,6 +334,15 @@ export const Movimentacao = () => {
                                         ))}
                                         </TableRow>
                                     </TableHead>
+                                    <TableBody>
+                                        {extrato !== undefined ? extrato
+                                            .map((row) => (
+                                            <TableRow key={row.idMovimentacao} role="checkbox" tabIndex={-1}>
+                                                <TableCell align="left">{row.dataTime}</TableCell>
+                                                <TableCell align="left">{row.valor}</TableCell>
+                                            </TableRow>
+                                        )):""}
+                                    </TableBody>
                                     <caption>Saldo: R$</caption>
                                 </Table>
                             </TableContainer>
