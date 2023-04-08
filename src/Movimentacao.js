@@ -26,7 +26,7 @@ export const Movimentacao = () => {
     const firstPart = {
         backgroundImage: "linear-gradient(90deg, #1A237E 0%, #5C6BC0 100%)",
         height: "12rem",
-        padding: "0rem 8rem 1rem 13rem",
+        padding: "0% 8rem 1rem 11%",
         display: "flex",
         alignItems:"flex-end",
         fontFamily: 'Arial',
@@ -35,7 +35,7 @@ export const Movimentacao = () => {
     }
 
     const secondPart = {
-        paddingLeft: "13rem",
+        paddingLeft: "11%",
         backgroundColor: "#E0E0E0",
         height: "100%"
     }
@@ -44,7 +44,7 @@ export const Movimentacao = () => {
         display: "flex", 
         direction: "column", 
         width: "100%",
-        marginRight: "16rem",
+        marginRight: "15%",
         marginTop: "2.5rem",
         height: "12rem",
         backgroundColor: "white",
@@ -266,7 +266,7 @@ export const Movimentacao = () => {
                         Extrato de Conta
                     </Typography>
                 </Grid>
-                <Grid container direction="row" style={{flexDirection: "column", marginRight: "16rem"}}>
+                <Grid container direction="row" style={{flexDirection: "column", marginRight: "15%"}}>
                     <Grid container item style={{ height: '6rem', backgroundColor:"white", width: "100%", marginBottom: "0.05rem", borderRadius: "4px", alignItems: "center"}}>
                         <Grid item sm={4} style={{paddingRight: "1rem", marginTop: "0.2rem", paddingLeft: "1rem"}}>
                             <Box sx={{ minWidth: 120 }}>

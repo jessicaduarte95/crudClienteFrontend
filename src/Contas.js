@@ -30,7 +30,7 @@ export const Contas = () => {
     const firstPart = {
     backgroundImage: "linear-gradient(90deg, #1A237E 0%, #5C6BC0 100%)",
     height: "12rem",
-    padding: "0rem 8rem 1rem 13rem",
+    padding: "0% 8rem 1rem 11%",
     display: "flex",
     alignItems:"flex-end",
     fontFamily: 'Arial',
@@ -39,7 +39,7 @@ export const Contas = () => {
     }
 
     const secondPart = {
-        paddingLeft: "13rem",
+        paddingLeft: "11%",
         backgroundColor: "#E0E0E0",
         height: "100%"
     }
@@ -48,7 +48,7 @@ export const Contas = () => {
         display: "flex", 
         direction: "column", 
         width: "100%",
-        marginRight: "16rem",
+        marginRight: "15%",
         marginTop: "2.5rem",
         height: "12rem",
         backgroundColor: "white",
@@ -222,7 +222,7 @@ export const Contas = () => {
                         </Grid>
                     </Grid>
                 </form>
-                <Grid item style={{ padding: "0rem", marginTop: "2.5rem", display: "flex", height: "35rem", width: "100%", marginRight: "16rem"}}>
+                <Grid item style={{ padding: "0rem", marginTop: "2.5rem", display: "flex", height: "35rem", width: "100%", marginRight: "15%"}}>
                     <Paper sx={{overflow: 'hidden', height: "28rem", width: "100%" }}>
                         <TableContainer sx={{ maxHeight: 440 }}>
                             <Table stickyHeader aria-label="sticky table">
