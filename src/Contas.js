@@ -95,7 +95,7 @@ export const Contas = () => {
     const { register, handleSubmit, reset } = useForm({defaultValues});
     const [optionsNomeCPF, setOptionsNomeCPF] = useState({NomeCPF: []});
     const [changeOption, setChangeOption] = useState('');
-    const [ dadosConta, setDadosContas] = useState([]);
+    const [dadosConta, setDadosContas] = useState([]);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [openExcluirConta, setOpenExcluirConta] = useState(false);
@@ -131,7 +131,7 @@ export const Contas = () => {
                 console.log(error)
             })
         reset();
-        setChangeOption();
+        setChangeOption('');
         listarContas();
     }
 

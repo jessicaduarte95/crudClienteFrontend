@@ -116,9 +116,9 @@ export const Movimentacao = () => {
         })
 
         setDisabled(true);
-        setDepositarRetirar();
-        setChangeOption();
-        setChangeOptionNumConta();
+        setDepositarRetirar('');
+        setChangeOption('');
+        setChangeOptionNumConta('');
         reset();
     }
 
@@ -135,6 +135,12 @@ export const Movimentacao = () => {
         .catch((error) => {
             console.log(error);
         })
+    }
+
+    const pesquisar = () => {
+        console.log("changeOptionNumConta: ", changeOptionContaPesquisa);
+        setChangeOptionContaPesquisa('')
+        setChangeOptionNomePesquisa('')
     }
 
     useEffect(() => {  
@@ -300,7 +306,7 @@ export const Movimentacao = () => {
                             </Box>
                         </Grid>
                         <Grid item sm={4.8} style={{height: '2.5rem', display: "flex", justifyContent: "flex-end"}}>
-                            <Button type="submit" variant="contained" style={{height: '2.5rem', width: "7.5rem"}}>Pesquizar</Button>
+                            <Button type="submit" variant="contained" style={{height: '2.5rem', width: "7.5rem"}} onClick={pesquisar}>Pesquizar</Button>
                         </Grid>
                     </Grid>
                     <Grid item style={{ padding: "0rem", display: "flex", height: "35rem", width: "100%", marginRight: "16rem"}}>
