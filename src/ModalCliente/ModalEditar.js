@@ -19,7 +19,7 @@ const style = {
 
 export const ModalEditar = (props) => {
 
-    const {openEditarCliente, handleCloseEditarCliente, rowData, idCliente, allData} = props;
+    const {openEditarCliente, handleCloseEditarCliente, rowData, idCliente, allData, handleClickAlertError, handleClickAlert} = props;
     const { register, handleSubmit, reset } = useForm();
 
     const onSubmit = async (data) => {
@@ -30,8 +30,10 @@ export const ModalEditar = (props) => {
         }
         ).then((response) => {
             console.log(response.data)
+            handleClickAlert()
         }).catch((error) => {
             console.log(error)
+            handleClickAlertError()
         })
         allData()
         handleCloseEditarCliente();

@@ -18,6 +18,9 @@ import { ModalExcluir } from "./ModalCliente/ModalExcluir";
 import { ModalEditar } from "./ModalCliente/ModalEditar";
 import { Link } from 'react-router-dom';
 import InputMask from 'react-input-mask';
+import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
+import { Alert } from "./Alert";
 
 export const Cliente = () => {
 
@@ -102,6 +105,8 @@ export const Cliente = () => {
   const handleCloseEditarCliente = () => setOpenEditarCliente(false);
   const [id, setId] = useState("");
   const [rowData, setRowData] = useState("");
+  const [openAlert, setOpenAlert] = useState(false);
+  const [openAlertErro, setOpenAlertErro] = useState(false);
 
 
   const handleChangePage = (event, newPage) => {
@@ -123,6 +128,28 @@ export const Cliente = () => {
     })
   }
 
+  const handleClickAlert = () => {
+    setOpenAlert(true);
+  };
+
+  const handleCloseAlert = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenAlert(false);
+  };
+
+  const handleClickAlertError = () => {
+    setOpenAlertErro(true);
+  };
+
+  const handleCloseAlertError = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenAlertErro(false);
+  };
+
   const onSubmit = async (data, e) => {
 
     await Axios.post("http://localhost:8080/cliente", {
@@ -132,8 +159,10 @@ export const Cliente = () => {
     }
         ).then((response) => {
           console.log(response.data)
+          handleClickAlert()
       }).catch((error) => {
           console.log(error)
+          handleClickAlertError()
       })
       reset();
       allData();
@@ -148,6 +177,20 @@ export const Cliente = () => {
       <Grid item sm={12} style={firstPart}>
           Sistema de Contas
       </Grid>
+      <Stack spacing={2} sx={{ width: '100%' }}>
+        <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleCloseAlert}>
+          <Alert onClose={handleCloseAlert} severity="success" sx={{ width: '100%' }}>
+            Ação realizada com sucesso!
+          </Alert>
+        </Snackbar>
+      </Stack>
+      <Stack spacing={2} sx={{ width: '100%' }}>
+        <Snackbar open={openAlertErro} autoHideDuration={6000} onClose={handleCloseAlertError}>
+          <Alert onClose={handleCloseAlertError} severity="error" sx={{ width: '100%' }}>
+            Erro ao realizar a ação!
+          </Alert>
+        </Snackbar>
+      </Stack>
       <Grid container item sm={12} spacing={2} style={secondPart}>
         <Grid container item sm={12} style={containerAdicionarCliente}>
           <form id="adicionar" onSubmit={handleSubmit(onSubmit)} style={{ width: "inherit"}}>
@@ -191,10 +234,9 @@ export const Cliente = () => {
                   noValidate
                   autoComplete="off"
                   >
-                  <InputMask id="cpf" label="CPF" maskChar={null} alwaysShowMask={false} mask="999.999.999-99" style={{height: "3rem"}} {...register("cpf", { required: true })}>
+                  <InputMask id="cpf" label="CPF" maskChar={null} alwaysShowMask={false} mask="999.999.999-99" style={{height: "3rem", width: "100%"}} {...register("cpf", { required: true })}>
                     {inputPropsMask => <TextField {...inputPropsMask} />}
                   </InputMask>
-                  {/* <TextField id="cpf" label="CPF" variant="outlined"  {...register("cpf", { required: true })} style={{width: "100%"}}/> */}
                 </Box>
               </Grid>
             </Grid>
@@ -269,8 +311,8 @@ export const Cliente = () => {
         </Paper>
        </Grid>
       </Grid>
-      <ModalExcluir openExcluirCliente={openExcluirCliente} handleCloseExcluirCliente={handleCloseExcluirCliente} id={id} allData={allData} />
-      <ModalEditar openEditarCliente={openEditarCliente} handleCloseEditarCliente={handleCloseEditarCliente} idCliente={id} rowData={rowData} allData={allData} />
+      <ModalExcluir openExcluirCliente={openExcluirCliente} handleCloseExcluirCliente={handleCloseExcluirCliente} id={id} allData={allData} handleClickAlert={handleClickAlert} handleClickAlertError={handleClickAlertError}/>
+      <ModalEditar openEditarCliente={openEditarCliente} handleCloseEditarCliente={handleCloseEditarCliente} idCliente={id} rowData={rowData} allData={allData} handleClickAlert={handleClickAlert} handleClickAlertError={handleClickAlertError}/>
     </Grid>
   );
 }
