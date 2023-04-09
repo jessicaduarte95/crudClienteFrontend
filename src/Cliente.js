@@ -17,6 +17,7 @@ import TablePagination from '@mui/material/TablePagination';
 import { ModalExcluir } from "./ModalCliente/ModalExcluir";
 import { ModalEditar } from "./ModalCliente/ModalEditar";
 import { Link } from 'react-router-dom';
+import InputMask from 'react-input-mask';
 
 export const Cliente = () => {
 
@@ -190,7 +191,10 @@ export const Cliente = () => {
                   noValidate
                   autoComplete="off"
                   >
-                  <TextField id="cpf" label="CPF" variant="outlined"  {...register("cpf", { required: true })} style={{width: "100%"}}/>
+                  <InputMask id="cpf" label="CPF" maskChar={null} alwaysShowMask={false} mask="999.999.999-99" style={{height: "3rem"}} {...register("cpf", { required: true })}>
+                    {inputPropsMask => <TextField {...inputPropsMask} />}
+                  </InputMask>
+                  {/* <TextField id="cpf" label="CPF" variant="outlined"  {...register("cpf", { required: true })} style={{width: "100%"}}/> */}
                 </Box>
               </Grid>
             </Grid>
