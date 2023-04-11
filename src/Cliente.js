@@ -40,7 +40,7 @@ export const Cliente = () => {
   }
 
   const secondPart = {
-    paddingLeft: "11%",
+    paddingLeft: "12.15%",
     backgroundColor: "#E0E0E0"
   }
 
