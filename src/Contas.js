@@ -20,6 +20,7 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import TablePagination from '@mui/material/TablePagination';
 import { ModalExcluir } from './ModalContas/ModalExcluir';
 import { ModalEditar } from './ModalContas/ModalEditar';
+import InputMask from 'react-input-mask';
 
 export const Contas = () => {
 
@@ -204,7 +205,9 @@ export const Contas = () => {
                             noValidate
                             autoComplete="off"
                             >
-                            <TextField id="numConta" label="Número da Conta" variant="outlined" {...register("numConta", { required: true })} style={{width: "100%"}}/>
+                            <InputMask id="numConta" label="Número da Conta" maskChar={null} alwaysShowMask={false} mask="9999.9999.9999.9999" variant="outlined" {...register("numConta", { required: true })} style={{width: "100%"}}>
+                                {inputPropsMask => <TextField {...inputPropsMask} />}
+                            </InputMask>
                             </Box>
                         </Grid>
                     </Grid>
