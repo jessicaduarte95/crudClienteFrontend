@@ -19,17 +19,18 @@ const style = {
 
 export const ModalEditar = (props) => {
 
-    const {handleCloseEditarConta, openEditarConta, rowData, idConta, listarContas} = props;
+    const {handleCloseEditarConta, openEditarConta, rowData, idConta, listarContas, handleClickAlert, handleClickAlertError} = props;
     const { register, handleSubmit, reset } = useForm();
 
     const onSubmit = async (data) => {
         await Axios.put(`http://localhost:8080/conta/${idConta}`, {
             numConta: data.numConta
         }
-        ).then((response) => {
-            console.log(response.data)
+        ).then(() => {
+            handleClickAlert();
         }).catch((error) => {
-            console.log(error)
+            console.log(error);
+            handleClickAlertError();
         })
         listarContas()
         handleCloseEditarConta();

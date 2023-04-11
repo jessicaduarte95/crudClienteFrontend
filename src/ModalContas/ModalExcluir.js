@@ -18,17 +18,19 @@ const style = {
 
 export const ModalExcluir = (props) => {
 
-    const {openExcluirConta, handleCloseExcluirConta, id, listarContas} = props;
+    const {openExcluirConta, handleCloseExcluirConta, id, listarContas, handleClickAlert, handleClickAlertError} = props;
 
     const excluirConta = () => {
      
       Axios.delete(`http://localhost:8080/conta/${id}`)
       .then(() => {
-          listarContas()
-          handleCloseExcluirConta()
+          listarContas();
+          handleCloseExcluirConta();
+          handleClickAlert();
       })
       .catch((error) => {
           console.log("Erro: ",error);
+          handleClickAlertError();
       })
     }
 

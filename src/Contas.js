@@ -21,6 +21,9 @@ import TablePagination from '@mui/material/TablePagination';
 import { ModalExcluir } from './ModalContas/ModalExcluir';
 import { ModalEditar } from './ModalContas/ModalEditar';
 import InputMask from 'react-input-mask';
+import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
+import { Alert } from "./Alert";
 
 export const Contas = () => {
 
@@ -107,6 +110,8 @@ export const Contas = () => {
     const handleCloseEditarConta = () => setOpenEditarConta(false);
     const [idConta, setIdConta] = useState('');
     const [rowData, setRowData] = useState('');
+    const [openAlert, setOpenAlert] = useState(false);
+    const [openAlertErro, setOpenAlertErro] = useState(false);
     const handleChangeOption = (event) => {
         setChangeOption(event.target.value);
     };
@@ -120,6 +125,28 @@ export const Contas = () => {
     setPage(0);
     };
 
+    const handleClickAlert = () => {
+        setOpenAlert(true);
+    };
+    
+    const handleCloseAlert = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+        setOpenAlert(false);
+    };
+    
+    const handleClickAlertError = () => {
+        setOpenAlertErro(true);
+    };
+    
+    const handleCloseAlertError = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+        setOpenAlertErro(false);
+    };
+
     const onSubmit = async (data) => {
       
         await Axios.post("http://localhost:8080/conta", {
@@ -128,8 +155,10 @@ export const Contas = () => {
             }
             ).then((response) => {
                 console.log(response.data)
+                handleClickAlert()
             }).catch((error) => {
                 console.log(error)
+                handleClickAlertError()
             })
         reset();
         setChangeOption('');
@@ -170,6 +199,20 @@ export const Contas = () => {
             <Grid item sm={12} style={firstPart}>
                 Sistema de Contas
             </Grid>
+            <Stack spacing={2} sx={{ width: '100%' }}>
+                <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleCloseAlert}>
+                <Alert onClose={handleCloseAlert} severity="success" sx={{ width: '100%' }}>
+                    Ação realizada com sucesso!
+                </Alert>
+                </Snackbar>
+            </Stack>
+            <Stack spacing={2} sx={{ width: '100%' }}>
+                <Snackbar open={openAlertErro} autoHideDuration={6000} onClose={handleCloseAlertError}>
+                <Alert onClose={handleCloseAlertError} severity="error" sx={{ width: '100%' }}>
+                    Erro ao realizar a ação!
+                </Alert>
+                </Snackbar>
+            </Stack>
             <Grid container style={secondPart}>
                 <form id="adicionarConta" onSubmit={handleSubmit(onSubmit)} style={adicionarConta}>
                     <Grid container item sm={12} style={{height: "3rem", marginBottom: "0rem", width: "100%"}}>
@@ -278,8 +321,8 @@ export const Contas = () => {
                     </Paper>
                 </Grid>
             </Grid>
-            <ModalExcluir openExcluirConta={openExcluirConta} handleCloseExcluirConta={handleCloseExcluirConta} id={idConta} listarContas={listarContas} />
-            <ModalEditar openEditarConta={openEditarConta} handleCloseEditarConta={handleCloseEditarConta} idConta={idConta} rowData={rowData} listarContas={listarContas} />
+            <ModalExcluir openExcluirConta={openExcluirConta} handleCloseExcluirConta={handleCloseExcluirConta} id={idConta} listarContas={listarContas} handleClickAlert={handleClickAlert} handleClickAlertError={handleClickAlertError}/>
+            <ModalEditar openEditarConta={openEditarConta} handleCloseEditarConta={handleCloseEditarConta} idConta={idConta} rowData={rowData} listarContas={listarContas} handleClickAlert={handleClickAlert} handleClickAlertError={handleClickAlertError}/>
         </Grid>
     )
 }
