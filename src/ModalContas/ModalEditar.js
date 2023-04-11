@@ -5,6 +5,7 @@ import Modal from '@mui/material/Modal';
 import  { Grid, Button, TextField }  from "@mui/material";
 import { useForm } from "react-hook-form";
 import Axios from 'axios';
+import InputMask from 'react-input-mask';
 
 const style = {
   position: 'absolute',
@@ -86,7 +87,9 @@ export const ModalEditar = (props) => {
                         noValidate
                         autoComplete="off"
                         >
-                        <TextField id="numConta" label="Número da Conta" variant="outlined"  defaultValue={rowData.numConta} {...register("numConta", { required: true })} style={{width: "100%"}}/>
+                        <InputMask id="numConta" label="Número da Conta" maskChar={null} alwaysShowMask={false} mask="9999.9999.9999.9999" defaultValue={rowData.numConta} {...register("numConta", { required: true })} style={{width: "100%"}}>
+                            {inputPropsMask => <TextField {...inputPropsMask}/>}
+                        </InputMask>
                     </Box>
                 </Grid>
                 <Grid container item sm={12} style={{marginTop: "1rem", justifyContent: "flex-end"}}>
