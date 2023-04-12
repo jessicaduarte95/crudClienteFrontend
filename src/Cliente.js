@@ -41,6 +41,7 @@ export const Cliente = () => {
 
   const secondPart = {
     paddingLeft: "12.15%",
+    paddingRight: "12.15%",
     backgroundColor: "#E0E0E0",
     height: "100%"
   }
@@ -49,7 +50,7 @@ export const Cliente = () => {
     display: "flex", 
     direction: "column", 
     alignItems: "center",
-    marginRight: "12.15%",
+    // marginRight: "12.15%",
     marginTop: "2.5rem",
     height: "28%",
     backgroundColor: "white",
@@ -256,7 +257,7 @@ export const Cliente = () => {
             </Grid>
           </form>
         </Grid>
-       <Grid item style={{ padding: "0rem", marginTop: "2.5rem", display: "flex", height: "35rem", width: "100%", marginRight: "12%"}}>
+       <Grid item style={{ padding: "0rem", marginTop: "2.5rem", display: "flex", height: "35rem", width: "100%"}}>
         <Paper sx={{overflow: 'hidden', height: "28rem", width: "100%" }}>
           <TableContainer sx={{ maxHeight: 440 }}>
             <Table stickyHeader aria-label="sticky table">
