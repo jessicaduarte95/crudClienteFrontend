@@ -276,7 +276,7 @@ export const Movimentacao = () => {
                     </Typography>
                 </Grid>
                 <Grid container direction="row" style={{height: "100%"}}>
-                    <Grid container item style={{ height: '17%', backgroundColor:"white", width: "100%", marginBottom: "0.05rem", borderRadius: "4px", alignItems: "center"}}>
+                    <Grid container item style={{ height: '17%', backgroundColor:"white", width: "100%", marginBottom: "0.05rem", borderRadius: "4px", alignItems: "center", paddingBottom: "1rem", paddingTop: "1rem"}}>
                         <Grid item sm={4} style={{paddingRight: "1rem", paddingLeft: "1rem"}}>
                             <Box sx={{ minWidth: 120 }}>
                                 <FormControl fullWidth>
@@ -314,7 +314,7 @@ export const Movimentacao = () => {
                                 </FormControl>
                             </Box>
                         </Grid>
-                        <Grid item sm={4.8} style={{height: '2.5rem', display: "flex", justifyContent: "flex-end", marginLeft: "1rem", paddingRight: "1.2rem"}}>
+                        <Grid item sm={4.8} style={{height: '3rem', display: "flex", justifyContent: "flex-end", marginLeft: "1rem", paddingRight: "1.2rem", paddingTop: "0.5rem"}}>
                             <Button type="submit" variant="contained" style={{height: '2.5rem', width: "7.5rem"}} onClick={pesquisar}>Pesquizar</Button>
                         </Grid>
                     </Grid>
