@@ -47,10 +47,10 @@ export const Cliente = () => {
   const containerAdicionarCliente ={
     display: "flex", 
     direction: "column", 
-    alignItems: "flex-start",
+    alignItems: "center",
     marginRight: "15%",
     marginTop: "2.5rem",
-    height: "12rem",
+    height: "28%",
     backgroundColor: "white",
     borderRadius: "0.4rem", 
     paddingRight: "1.4rem"
@@ -193,7 +193,7 @@ export const Cliente = () => {
       </Stack>
       <Grid container item sm={12} spacing={2} style={secondPart}>
         <Grid container item sm={12} style={containerAdicionarCliente}>
-          <form id="adicionar" onSubmit={handleSubmit(onSubmit)} style={{ width: "inherit"}}>
+          <form id="adicionar" onSubmit={handleSubmit(onSubmit)} style={{ width: "inherit", marginBottom: "1rem"}}>
             <Grid item sm={12} style={{height: "3rem", marginBottom: "0.2rem"}}>
               <Typography style={{fontFamily: 'Arial', fontSize: '1.8rem', paddingLeft: "0.1rem", color: "#424242"}}>
                 Cadastro de Cliente
@@ -213,7 +213,7 @@ export const Cliente = () => {
 
                 </Box>
               </Grid>
-              <Grid item sm={4} style={{height: '3.3rem', marginLeft: "2.5rem", padding: "0rem"}}>
+              <Grid item sm={4} style={{height: '3.3rem', marginLeft: "2.5%", padding: "0rem"}}>
                 <Box
                   component="form"
                   sx={{
@@ -225,7 +225,7 @@ export const Cliente = () => {
                   <TextField id="endereco" label="Endereço" variant="outlined" {...register("endereco", { required: true })} style={{width: "100%"}}/>
                 </Box>
               </Grid>
-              <Grid item sm={4} style={{height: '3.3rem', marginLeft: "2.5rem", padding: "0rem"}}>
+              <Grid item sm={4} style={{height: '3.3rem', marginLeft: "2.5%", padding: "0rem"}}>
                 <Box
                   component="form"
                   sx={{
@@ -240,7 +240,7 @@ export const Cliente = () => {
                 </Box>
               </Grid>
             </Grid>
-            <Grid container item sm={12}>
+            <Grid container item sm={12} spacing={2}>
               <Grid item sm={8}>
                 <Link to='/contas' style={{height:"0px", textDecoration: "none"}}>
                   <Button type="submit" variant="contained" style={{height: '2.5rem', width: "6.5rem"}}>Contas</Button>
