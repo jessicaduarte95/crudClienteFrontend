@@ -256,7 +256,7 @@ export const Cliente = () => {
             </Grid>
           </form>
         </Grid>
-       <Grid item style={{ padding: "0rem", marginTop: "2.5rem", display: "flex", height: "35rem", width: "100%", marginRight: "15%"}}>
+       <Grid item style={{ padding: "0rem", marginTop: "2.5rem", display: "flex", height: "35rem", width: "100%", marginRight: "12%"}}>
         <Paper sx={{overflow: 'hidden', height: "28rem", width: "100%" }}>
           <TableContainer sx={{ maxHeight: 440 }}>
             <Table stickyHeader aria-label="sticky table">
