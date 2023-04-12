@@ -50,7 +50,6 @@ export const Cliente = () => {
     display: "flex", 
     direction: "column", 
     alignItems: "center",
-    // marginRight: "12.15%",
     marginTop: "2.5rem",
     height: "28%",
     backgroundColor: "white",

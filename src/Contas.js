@@ -44,6 +44,7 @@ export const Contas = () => {
 
     const secondPart = {
         paddingLeft: "11%",
+        paddingRight: "12.15%",
         backgroundColor: "#E0E0E0",
         height: "100%"
     }
@@ -52,13 +53,12 @@ export const Contas = () => {
         display: "flex", 
         direction: "column", 
         width: "100%",
-        marginRight: "15%",
         marginTop: "2.5rem",
-        height: "12rem",
+        height: "28%",
         backgroundColor: "white",
         borderRadius: "0.4rem", 
         paddingRight: "1.4rem",
-        flexDirection: "column",
+        flexDirection: "column"
     }
 
     const columns = [
@@ -216,12 +216,12 @@ export const Contas = () => {
             <Grid container style={secondPart}>
                 <form id="adicionarConta" onSubmit={handleSubmit(onSubmit)} style={adicionarConta}>
                     <Grid container item sm={12} style={{height: "3rem", marginBottom: "0rem", width: "100%"}}>
-                        <Typography style={{fontFamily: 'Arial', fontSize: '1.8rem', paddingLeft: "1rem", paddingTop: "1rem", color: "#424242"}}>
+                        <Typography style={{fontFamily: 'Arial', fontSize: '1.8rem', paddingLeft: "1rem", paddingTop: "0.7rem", color: "#424242"}}>
                             Cadastro de Conta
                         </Typography>
                     </Grid>
-                    <Grid item style={{display: "flex", direction: "column", height: '4.5rem', paddingLeft: "1rem", paddingTop: "0.9rem"}}>
-                        <Grid item sm={6} style={{paddingRight: "1rem", marginTop: "0.2rem"}}>
+                    <Grid item style={{display: "flex", direction: "column", height: '4.5rem', paddingLeft: "1rem", paddingTop: "0.9rem", alignItems: "center", marginBottom: "0.6rem"}}>
+                        <Grid item sm={6} style={{paddingRight: "1rem"}}>
                             <Box sx={{ minWidth: 120 }}>
                                 <FormControl fullWidth>
                                     <InputLabel id="demo-simple-select-label">Nome e CPF</InputLabel>
@@ -239,7 +239,7 @@ export const Contas = () => {
                                 </FormControl>
                             </Box>
                         </Grid>
-                        <Grid item sm={6} style={{height: '3.3rem', padding: "0rem",  marginTop: "0.1rem"}}>
+                        <Grid item sm={6} style={{height: '3.85rem', padding: "0rem"}}>
                             <Box
                             component="form"
                             sx={{
@@ -254,8 +254,8 @@ export const Contas = () => {
                             </Box>
                         </Grid>
                     </Grid>
-                    <Grid container item sm={12} style={{marginTop: "1rem", paddingLeft: "1rem"}}>
-                        <Grid item sm={8}>
+                    <Grid container item sm={12} style={{marginTop: "0.1rem", paddingLeft: "1rem"}}>
+                        <Grid item sm={8} style={{marginBottom: "0.7rem"}}>
                             <Link to='/' style={{height:"0px", textDecoration: "none"}}>
                                 <Button variant="contained" style={{height: '2.5rem', width: "6.5rem"}}>Cliente</Button>
                             </Link>
@@ -263,12 +263,12 @@ export const Contas = () => {
                                 <Button variant="contained" style={{height: '2.5rem', width: "8.5rem", marginLeft: "0.5rem"}}>Movimentação</Button>
                             </Link>
                         </Grid>
-                        <Grid item sm={4} style={{height: '2.5rem', display: "flex", justifyContent: "flex-end"}}>
+                        <Grid item sm={4} style={{height: '2.5rem', display: "flex", justifyContent: "flex-end", marginBottom: "1rem"}}>
                             <Button type="submit" variant="contained" style={{height: '2.5rem', width: "7.5rem"}}>Adicionar</Button>
                         </Grid>
                     </Grid>
                 </form>
-                <Grid item style={{ padding: "0rem", marginTop: "2.5rem", display: "flex", height: "35rem", width: "100%", marginRight: "15%"}}>
+                <Grid item style={{ padding: "0rem", marginTop: "2.5rem", display: "flex", height: "35rem", width: "100%"}}>
                     <Paper sx={{overflow: 'hidden', height: "28rem", width: "100%" }}>
                         <TableContainer sx={{ maxHeight: 440 }}>
                             <Table stickyHeader aria-label="sticky table">
