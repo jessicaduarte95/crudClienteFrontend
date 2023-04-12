@@ -41,14 +41,15 @@ export const Cliente = () => {
 
   const secondPart = {
     paddingLeft: "12.15%",
-    backgroundColor: "#E0E0E0"
+    backgroundColor: "#E0E0E0",
+    height: "100%"
   }
 
   const containerAdicionarCliente ={
     display: "flex", 
     direction: "column", 
     alignItems: "center",
-    marginRight: "15%",
+    marginRight: "12.15%",
     marginTop: "2.5rem",
     height: "28%",
     backgroundColor: "white",
@@ -193,7 +194,7 @@ export const Cliente = () => {
       </Stack>
       <Grid container item sm={12} spacing={2} style={secondPart}>
         <Grid container item sm={12} style={containerAdicionarCliente}>
-          <form id="adicionar" onSubmit={handleSubmit(onSubmit)} style={{ width: "inherit", marginBottom: "1rem"}}>
+          <form id="adicionar" onSubmit={handleSubmit(onSubmit)} style={{ width: "inherit", marginBottom: "1.4rem"}}>
             <Grid item sm={12} style={{height: "3rem", marginBottom: "0.2rem"}}>
               <Typography style={{fontFamily: 'Arial', fontSize: '1.8rem', paddingLeft: "0.1rem", color: "#424242"}}>
                 Cadastro de Cliente
