@@ -275,7 +275,7 @@ export const Movimentacao = () => {
                         Extrato de Conta
                     </Typography>
                 </Grid>
-                <Grid container direction="row">
+                <Grid container direction="row" style={{height: "100%"}}>
                     <Grid container item style={{ height: '17%', backgroundColor:"white", width: "100%", marginBottom: "0.05rem", borderRadius: "4px", alignItems: "center"}}>
                         <Grid item sm={4} style={{paddingRight: "1rem", paddingLeft: "1rem"}}>
                             <Box sx={{ minWidth: 120 }}>
