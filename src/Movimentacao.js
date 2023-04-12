@@ -36,17 +36,18 @@ export const Movimentacao = () => {
 
     const secondPart = {
         paddingLeft: "11%",
+        paddingRight: "12.15%",
         backgroundColor: "#E0E0E0",
         height: "100%"
     }
 
-    const adicionarConta = {
+    const adicionarMovimentacao = {
         display: "flex", 
         direction: "column", 
         width: "100%",
-        marginRight: "15%",
+        // marginRight: "15%",
         marginTop: "2.5rem",
-        height: "12rem",
+        height: "initial",
         backgroundColor: "white",
         borderRadius: "0.4rem", 
         paddingRight: "1.4rem",
@@ -181,7 +182,7 @@ export const Movimentacao = () => {
                 Sistema de Contas
             </Grid>
             <Grid container style={secondPart}>
-                <form id="movimentacao" onSubmit={handleSubmit(onSubmit)} style={adicionarConta}>
+                <form id="movimentacao" onSubmit={handleSubmit(onSubmit)} style={adicionarMovimentacao}>
                     <Grid container item sm={12} style={{height: "3rem", marginBottom: "0rem", width: "100%"}}>
                         <Typography style={{fontFamily: 'Arial', fontSize: '1.8rem', paddingLeft: "1rem", paddingTop: "1rem", color: "#424242"}}>
                             Cadastro de Movimentação
@@ -274,9 +275,9 @@ export const Movimentacao = () => {
                         Extrato de Conta
                     </Typography>
                 </Grid>
-                <Grid container direction="row" style={{flexDirection: "column", marginRight: "15%"}}>
-                    <Grid container item style={{ height: '6rem', backgroundColor:"white", width: "100%", marginBottom: "0.05rem", borderRadius: "4px", alignItems: "center"}}>
-                        <Grid item sm={4} style={{paddingRight: "1rem", marginTop: "0.2rem", paddingLeft: "1rem"}}>
+                <Grid container direction="row">
+                    <Grid container item style={{ height: '17%', backgroundColor:"white", width: "100%", marginBottom: "0.05rem", borderRadius: "4px", alignItems: "center"}}>
+                        <Grid item sm={4} style={{paddingRight: "1rem", paddingLeft: "1rem"}}>
                             <Box sx={{ minWidth: 120 }}>
                                 <FormControl fullWidth>
                                     <InputLabel id="demo-simple-select-label">Nome e CPF</InputLabel>
@@ -294,7 +295,7 @@ export const Movimentacao = () => {
                                 </FormControl>
                             </Box>
                         </Grid>
-                        <Grid item sm={3} style={{paddingRight: "1rem", marginTop: "0.2rem"}}>
+                        <Grid item sm={3} style={{paddingRight: "0rem"}}>
                             <Box sx={{ minWidth: 120 }}>
                                 <FormControl fullWidth>
                                     <InputLabel id="demo-simple-select-label">Número da Conta</InputLabel>
@@ -313,11 +314,11 @@ export const Movimentacao = () => {
                                 </FormControl>
                             </Box>
                         </Grid>
-                        <Grid item sm={4.8} style={{height: '2.5rem', display: "flex", justifyContent: "flex-end"}}>
+                        <Grid item sm={4.8} style={{height: '2.5rem', display: "flex", justifyContent: "flex-end", marginLeft: "1rem", paddingRight: "1.2rem"}}>
                             <Button type="submit" variant="contained" style={{height: '2.5rem', width: "7.5rem"}} onClick={pesquisar}>Pesquizar</Button>
                         </Grid>
                     </Grid>
-                    <Grid item style={{ padding: "0rem", display: "flex", height: "35rem", width: "100%", marginRight: "16rem"}}>
+                    <Grid item style={{ padding: "0rem", display: "flex", height: "35rem", width: "100%"}}>
                         <Paper sx={{overflow: 'hidden', height: "28rem", width: "100%" }}>
                             <TableContainer sx={{ maxHeight: 440 }}>
                                 <Table stickyHeader aria-label="sticky table">
