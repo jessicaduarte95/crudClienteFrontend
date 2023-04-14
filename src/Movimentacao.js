@@ -86,6 +86,7 @@ export const Movimentacao = () => {
     const [extrato, setExtrato] = useState([]);
     const [openAlert, setOpenAlert] = useState(false);
     const [openAlertErro, setOpenAlertErro] = useState(false);
+    const [valor, setValor] = useState();
 
     const handleChangeDepositarRetirar = (event) => {
         setDepositarRetirar(event.target.value);
@@ -170,6 +171,11 @@ export const Movimentacao = () => {
     const pesquisar = () => {
         Axios.get(`http://localhost:8080/movimentacao/filtro/${changeOptionContaPesquisa}`)
         .then((response) => {
+            response.data.reduce(getTotal, 0);
+            function getTotal(total, item) {
+                setValor(total + item.valor);
+                return total + item.valor;
+            }
             setExtrato(response.data)
         }).catch((error) => {
             console.log(error)
@@ -200,8 +206,7 @@ export const Movimentacao = () => {
                 console.log(error);
             })
         }
-        console.log("extrato: ", extrato);
-      }, [changeOption, changeOptionNomePesquisa])
+      }, [changeOption, changeOptionNomePesquisa, valor])
 
     return (
         <Grid container style={containerStyle}>
@@ -382,7 +387,11 @@ export const Movimentacao = () => {
                                             </TableRow>
                                         )):""}
                                     </TableBody>
-                                    <caption>Saldo: R$</caption>
+                                    {
+                                        valor < 0 && valor !== undefined && valor !== null? 
+                                        <caption style={{color: 'red', fontWeight: 'bold', justifyContent: 'flex-end'}}>Valor Total: R$ {valor !== undefined ? valor : ""}</caption>:
+                                        <caption style={{color: 'black', fontWeight: 'bold', justifyContent: 'flex-end'}}>Valor Total: R$ {valor !== undefined ? valor : ""}</caption>
+                                    }     
                                 </Table>
                             </TableContainer>
                         </Paper>
