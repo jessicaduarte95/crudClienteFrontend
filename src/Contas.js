@@ -34,11 +34,11 @@ export const Contas = () => {
     const firstPart = {
     backgroundImage: "linear-gradient(90deg, #1A237E 0%, #5C6BC0 100%)",
     height: "12rem",
-    padding: "0% 8rem 1rem 11%",
+    padding: "1rem 8rem 1rem 11%",
     display: "flex",
     alignItems:"flex-end",
     fontFamily: 'Arial',
-    fontSize: '310%',
+    fontSize: '3rem',
     color: 'white'
     }
 

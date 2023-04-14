@@ -26,11 +26,11 @@ export const Movimentacao = () => {
     const firstPart = {
         backgroundImage: "linear-gradient(90deg, #1A237E 0%, #5C6BC0 100%)",
         height: "12rem",
-        padding: "0% 8rem 1rem 11%",
+        padding: "1rem 8rem 1rem 11%",
         display: "flex",
         alignItems:"flex-end",
         fontFamily: 'Arial',
-        fontSize: '310%',
+        fontSize: '3rem',
         color: 'white'
     }
 
@@ -45,7 +45,6 @@ export const Movimentacao = () => {
         display: "flex", 
         direction: "column", 
         width: "100%",
-        // marginRight: "15%",
         marginTop: "2.5rem",
         height: "initial",
         backgroundColor: "white",
@@ -183,12 +182,12 @@ export const Movimentacao = () => {
             </Grid>
             <Grid container style={secondPart}>
                 <form id="movimentacao" onSubmit={handleSubmit(onSubmit)} style={adicionarMovimentacao}>
-                    <Grid container item sm={12} style={{height: "3rem", marginBottom: "0rem", width: "100%"}}>
+                    <Grid container item sm={12} style={{height: "6rem", marginBottom: "0rem", width: "100%"}}>
                         <Typography style={{fontFamily: 'Arial', fontSize: '1.8rem', paddingLeft: "1rem", paddingTop: "1rem", color: "#424242"}}>
                             Cadastro de Movimentação
                         </Typography>
                     </Grid>
-                    <Grid container item sm={12} style={{display: "flex", direction: "column", height: '4.5rem', paddingLeft: "1rem", paddingTop: "0.9rem"}}>
+                    <Grid container item sm={12} style={{display: "flex", direction: "column", height: '16.5rem', paddingLeft: "1rem", paddingTop: "0.9rem"}}>
                         <Grid item sm={4} style={{paddingRight: "1rem", marginTop: "0.2rem"}}>
                             <Box sx={{ minWidth: 120 }}>
                                 <FormControl fullWidth>
@@ -226,12 +225,9 @@ export const Movimentacao = () => {
                                 </FormControl>
                             </Box>
                         </Grid>
-                        <Grid item sm={2} style={{height: '3.3rem', padding: "0rem",  marginTop: "0.1rem", paddingRight: "1rem"}}>
+                        <Grid item sm={2} style={{height: '3.4rem', padding: "0rem",  marginTop: "0.2rem", paddingRight: "1rem"}}>
                             <Box
                             component="form"
-                            sx={{
-                            '& > :not(style)': { m: 0.3 }
-                            }}
                             noValidate
                             autoComplete="off"
                             >
@@ -256,8 +252,8 @@ export const Movimentacao = () => {
                             </Box>
                         </Grid>
                     </Grid>
-                    <Grid container item sm={12} style={{marginTop: "1rem", paddingLeft: "1rem"}}>
-                        <Grid item sm={8}>
+                    <Grid container item sm={12} style={{marginTop: "1rem", paddingLeft: "1rem", marginBottom: "1rem"}}>
+                        <Grid item sm={8} style={{ marginBottom: "0.7rem"}}>
                             <Link to='/' style={{height:"0px", textDecoration: "none"}}>
                                 <Button variant="contained" style={{height: '2.5rem', width: "6.5rem"}}>Cliente</Button>
                             </Link>
