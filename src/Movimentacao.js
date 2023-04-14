@@ -16,6 +16,9 @@ import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import moment from 'moment';
+import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
+import { Alert } from "./Alert";
 
 export const Movimentacao = () => {
 
@@ -81,6 +84,8 @@ export const Movimentacao = () => {
     const [disabled, setDisabled] = useState(true);
     const [disabledPesquisar, setDisabledPesquisar] = useState(true);
     const [extrato, setExtrato] = useState([]);
+    const [openAlert, setOpenAlert] = useState(false);
+    const [openAlertErro, setOpenAlertErro] = useState(false);
 
     const handleChangeDepositarRetirar = (event) => {
         setDepositarRetirar(event.target.value);
@@ -101,6 +106,29 @@ export const Movimentacao = () => {
         setChangeOptionContaPesquisa(event.target.value);
     };
 
+    const handleClickAlert = () => {
+        setOpenAlert(true);
+    };
+    
+    const handleCloseAlert = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+        setOpenAlert(false);
+    };
+    
+    const handleClickAlertError = () => {
+        setOpenAlertErro(true);
+    };
+    
+    const handleCloseAlertError = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+        setOpenAlertErro(false);
+    };
+
+
     const onSubmit = async (data) => {
         const dataTime = moment().format('DD/MM/YYYY HH:mm');
         const idConta = changeOptionNumConta;
@@ -110,10 +138,11 @@ export const Movimentacao = () => {
             dataTime: dataTime,
             valor: depositarRetirar === 'Retirar' ? data.valor.replace(/-/, "") * (-1) : Math.abs(data.valor)
 
-        }).then((response) => {
-            console.log(response.data)
+        }).then(() => {
+            handleClickAlert()
         }).catch((error) => {
             console.log(error)
+            handleClickAlertError()
         })
 
         setDisabled(true);
@@ -139,7 +168,6 @@ export const Movimentacao = () => {
     }
 
     const pesquisar = () => {
-        console.log("changeOptionNumConta: ", changeOptionContaPesquisa);
         Axios.get(`http://localhost:8080/movimentacao/filtro/${changeOptionContaPesquisa}`)
         .then((response) => {
             setExtrato(response.data)
@@ -180,6 +208,20 @@ export const Movimentacao = () => {
             <Grid item sm={12} style={firstPart}>
                 Sistema de Contas
             </Grid>
+            <Stack spacing={2} sx={{ width: '100%' }}>
+                <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleCloseAlert}>
+                <Alert onClose={handleCloseAlert} severity="success" sx={{ width: '100%' }}>
+                    Ação realizada com sucesso!
+                </Alert>
+                </Snackbar>
+            </Stack>
+            <Stack spacing={2} sx={{ width: '100%' }}>
+                <Snackbar open={openAlertErro} autoHideDuration={6000} onClose={handleCloseAlertError}>
+                <Alert onClose={handleCloseAlertError} severity="error" sx={{ width: '100%' }}>
+                    Erro ao realizar a ação!
+                </Alert>
+                </Snackbar>
+            </Stack>
             <Grid container style={secondPart}>
                 <form id="movimentacao" onSubmit={handleSubmit(onSubmit)} style={adicionarMovimentacao}>
                     <Grid container item sm={12} style={{height: "6rem", marginBottom: "0rem", width: "100%"}}>
