@@ -320,7 +320,7 @@ export const Movimentacao = () => {
                 </Grid>
                 <Grid container direction="row" style={{height: "100%"}}>
                     <Grid container item style={{ height: '17%', backgroundColor:"white", width: "100%", marginBottom: "0.05rem", borderRadius: "4px", alignItems: "center", paddingBottom: "1rem", paddingTop: "1rem"}}>
-                        <Grid item sm={4} style={{paddingRight: "1rem", paddingLeft: "1rem"}}>
+                        <Grid item sm={4} style={{paddingRight: "1rem", paddingLeft: "1rem", marginBottom: "0.5rem"}}>
                             <Box sx={{ minWidth: 120 }}>
                                 <FormControl fullWidth>
                                     <InputLabel id="demo-simple-select-label">Nome e CPF</InputLabel>
@@ -338,7 +338,7 @@ export const Movimentacao = () => {
                                 </FormControl>
                             </Box>
                         </Grid>
-                        <Grid item sm={3} style={{paddingRight: "0rem"}}>
+                        <Grid item sm={3} style={{paddingRight: "0rem",  paddingLeft: "1rem",  marginBottom: "0.5rem"}}>
                             <Box sx={{ minWidth: 120 }}>
                                 <FormControl fullWidth>
                                     <InputLabel id="demo-simple-select-label">Número da Conta</InputLabel>
