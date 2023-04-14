@@ -153,8 +153,7 @@ export const Contas = () => {
             cliente: {idCliente: changeOption},
             numConta: data.numConta,
             }
-            ).then((response) => {
-                console.log(response.data)
+            ).then(() => {
                 handleClickAlert()
             }).catch((error) => {
                 console.log(error)
