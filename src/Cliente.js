@@ -108,6 +108,7 @@ export const Cliente = () => {
   const [rowData, setRowData] = useState("");
   const [openAlert, setOpenAlert] = useState(false);
   const [openAlertErro, setOpenAlertErro] = useState(false);
+  const [openAlertWarn, setOpenAlertWarn] = useState(false);
 
 
   const handleChangePage = (event, newPage) => {
@@ -151,6 +152,17 @@ export const Cliente = () => {
     setOpenAlertErro(false);
   };
 
+  const handleClickAlertWarn = () => {
+    setOpenAlertWarn(true);
+  };
+
+  const handleCloseAlertWarn = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenAlertWarn(false);
+  };
+
   const onSubmit = async (data, e) => {
 
     await Axios.post("http://localhost:8080/cliente", {
@@ -189,6 +201,13 @@ export const Cliente = () => {
         <Snackbar open={openAlertErro} autoHideDuration={6000} onClose={handleCloseAlertError}>
           <Alert onClose={handleCloseAlertError} severity="error" sx={{ width: '100%' }}>
             Erro ao realizar a ação!
+          </Alert>
+        </Snackbar>
+      </Stack>
+      <Stack spacing={2} sx={{ width: '100%' }}>
+        <Snackbar open={openAlertWarn} autoHideDuration={6000} onClose={handleCloseAlertWarn}>
+          <Alert onClose={handleCloseAlertWarn} severity="warning" sx={{ width: '100%' }}>
+            Cliente não pode ser excluído, pois existem contas associadas!
           </Alert>
         </Snackbar>
       </Stack>
@@ -312,7 +331,7 @@ export const Cliente = () => {
         </Paper>
        </Grid>
       </Grid>
-      <ModalExcluir openExcluirCliente={openExcluirCliente} handleCloseExcluirCliente={handleCloseExcluirCliente} id={id} allData={allData} handleClickAlert={handleClickAlert} handleClickAlertError={handleClickAlertError}/>
+      <ModalExcluir openExcluirCliente={openExcluirCliente} handleCloseExcluirCliente={handleCloseExcluirCliente} id={id} allData={allData} handleClickAlert={handleClickAlert} handleClickAlertError={handleClickAlertError} handleClickAlertWarn={handleClickAlertWarn}/>
       <ModalEditar openEditarCliente={openEditarCliente} handleCloseEditarCliente={handleCloseEditarCliente} idCliente={id} rowData={rowData} allData={allData} handleClickAlert={handleClickAlert} handleClickAlertError={handleClickAlertError}/>
     </Grid>
   );

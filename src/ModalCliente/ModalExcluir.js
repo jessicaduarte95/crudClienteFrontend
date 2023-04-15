@@ -18,18 +18,29 @@ const style = {
 
 export const ModalExcluir = (props) => {
 
-    const {openExcluirCliente, handleCloseExcluirCliente, id, allData, handleClickAlert, handleClickAlertError} = props;
+    const {openExcluirCliente, handleCloseExcluirCliente, id, allData, handleClickAlert, handleClickAlertError, handleClickAlertWarn} = props;
 
     const excluirCliente = async () => {
-        await Axios.delete(`http://localhost:8080/cliente/${id}`)
-        .then(() => {
-            allData();
-            handleCloseExcluirCliente();
-            handleClickAlert();
+      Axios.get(`http://localhost:8080/conta/filtro/${id}`)
+        .then((response) => {
+            if(response.data.length > 0){
+              handleCloseExcluirCliente();
+              handleClickAlertWarn();
+            }else{
+              Axios.delete(`http://localhost:8080/cliente/${id}`)
+              .then(() => {
+                  allData();
+                  handleCloseExcluirCliente();
+                  handleClickAlert();
+              })
+              .catch((error) => {
+                  console.log(error);
+                  handleClickAlertError();
+              })
+            }
         })
         .catch((error) => {
-            console.log(error);
-            handleClickAlertError();
+          console.log(error);
         })
     }
 
