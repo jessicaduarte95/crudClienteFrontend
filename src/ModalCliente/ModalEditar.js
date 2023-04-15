@@ -11,7 +11,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 500,
+  width: '60%',
   bgcolor: 'background.paper',
   boxShadow: 24,
   p: 4
@@ -87,7 +87,7 @@ export const ModalEditar = (props) => {
                 noValidate
                 autoComplete="off"
                 >
-                <TextField id="cpf" label="CPF" variant="outlined"  {...register("cpf", { required: true })} defaultValue={rowData.cpf} style={{width: "100%"}}/>
+                <TextField id="cpf" label="CPF" variant="outlined"  {...register("cpf", { required: true })} defaultValue={rowData.cpf} style={{width: "65%"}}/>
             </Box>
         </Grid>
         <Grid container item sm={12} style={{marginTop: "1rem", justifyContent: "flex-end"}}>
