@@ -112,6 +112,7 @@ export const Contas = () => {
     const [rowData, setRowData] = useState('');
     const [openAlert, setOpenAlert] = useState(false);
     const [openAlertErro, setOpenAlertErro] = useState(false);
+    const [openAlertWarn, setOpenAlertWarn] = useState(false);
     const handleChangeOption = (event) => {
         setChangeOption(event.target.value);
     };
@@ -145,6 +146,17 @@ export const Contas = () => {
           return;
         }
         setOpenAlertErro(false);
+    };
+
+    const handleClickAlertWarn = () => {
+        setOpenAlertWarn(true);
+    };
+    
+    const handleCloseAlertWarn = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpenAlertWarn(false);
     };
 
     const onSubmit = async (data) => {
@@ -209,6 +221,13 @@ export const Contas = () => {
                 <Snackbar open={openAlertErro} autoHideDuration={6000} onClose={handleCloseAlertError}>
                 <Alert onClose={handleCloseAlertError} severity="error" sx={{ width: '100%' }}>
                     Erro ao realizar a ação!
+                </Alert>
+                </Snackbar>
+            </Stack>
+            <Stack spacing={2} sx={{ width: '100%' }}>
+                <Snackbar open={openAlertWarn} autoHideDuration={6000} onClose={handleCloseAlertWarn}>
+                <Alert onClose={handleCloseAlertWarn} severity="warning" sx={{ width: '100%' }}>
+                    Conta não pode ser excluída, pois existem movimentações nesta conta!
                 </Alert>
                 </Snackbar>
             </Stack>
@@ -320,7 +339,7 @@ export const Contas = () => {
                     </Paper>
                 </Grid>
             </Grid>
-            <ModalExcluir openExcluirConta={openExcluirConta} handleCloseExcluirConta={handleCloseExcluirConta} id={idConta} listarContas={listarContas} handleClickAlert={handleClickAlert} handleClickAlertError={handleClickAlertError}/>
+            <ModalExcluir openExcluirConta={openExcluirConta} handleCloseExcluirConta={handleCloseExcluirConta} id={idConta} listarContas={listarContas} handleClickAlert={handleClickAlert} handleClickAlertError={handleClickAlertError} handleClickAlertWarn={handleClickAlertWarn}/>
             <ModalEditar openEditarConta={openEditarConta} handleCloseEditarConta={handleCloseEditarConta} idConta={idConta} rowData={rowData} listarContas={listarContas} handleClickAlert={handleClickAlert} handleClickAlertError={handleClickAlertError}/>
         </Grid>
     )

@@ -18,20 +18,29 @@ const style = {
 
 export const ModalExcluir = (props) => {
 
-    const {openExcluirConta, handleCloseExcluirConta, id, listarContas, handleClickAlert, handleClickAlertError} = props;
+    const {openExcluirConta, handleCloseExcluirConta, id, listarContas, handleClickAlert, handleClickAlertError, handleClickAlertWarn} = props;
 
     const excluirConta = () => {
-     
-      Axios.delete(`http://localhost:8080/conta/${id}`)
-      .then(() => {
-          listarContas();
-          handleCloseExcluirConta();
-          handleClickAlert();
-      })
-      .catch((error) => {
-          console.log("Erro: ",error);
-          handleClickAlertError();
-      })
+      Axios.get(`http://localhost:8080/movimentacao/filtro/${id}`)
+        .then((response) => {
+          if(response.data.length > 0){
+            handleCloseExcluirConta();
+            handleClickAlertWarn();
+          }else{
+            Axios.delete(`http://localhost:8080/conta/${id}`)
+            .then(() => {
+                listarContas();
+                handleCloseExcluirConta();
+                handleClickAlert();
+            })
+            .catch((error) => {
+                console.log("Erro: ",error);
+                handleClickAlertError();
+            })
+          }
+        }).catch((error) => {
+            console.log(error)
+        })
     }
 
   return (
