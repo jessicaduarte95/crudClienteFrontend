@@ -10,7 +10,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 450,
+  width: '40%',
   bgcolor: 'background.paper',
   boxShadow: 24,
   p: 4,
@@ -49,7 +49,7 @@ export const ModalExcluir = (props) => {
         Tem certeza que deseja excluir a conta selecionada?
         </Typography>
         <Grid container item sm={12} style={{marginTop: "1rem", justifyContent: "flex-end"}}>
-            <Button type="submit" variant="outlined" style={{height: '2.5rem', width: "6.5rem"}} onClick={handleCloseExcluirConta}>Cancelar</Button>
+            <Button type="submit" variant="outlined" style={{height: '2.5rem', width: "6.5rem",  marginBottom: '0.5rem'}} onClick={handleCloseExcluirConta}>Cancelar</Button>
             <Button type="submit" variant="contained" style={{height: '2.5rem', width: "6.5rem", marginLeft: "0.7rem"}}  onClick={excluirConta}>Excluir</Button>
         </Grid>
     </Box>
